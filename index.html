@@ -1005,78 +1005,44 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             messageDiv.style.display = 'none';
-            
-            // For local testing, always use mock response
-            const isLocalhost = window.location.hostname === 'localhost' || 
-                               window.location.hostname === '127.0.0.1' ||
-                               window.location.hostname === '' ||
-                               window.location.protocol === 'file:';
-            
-            if (isLocalhost || !navigator.onLine) {
-                // Simulate API delay
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // Mock successful response
-                const mockKey = 'TEST-KEY-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-                messageDiv.innerHTML = `
-                    <div class="success-inline">
-                        <p>Success! Your early access key: <strong>${mockKey}</strong></p>
-                        <button onclick="copyAccessKeyInline('${mockKey}')" class="copy-btn-inline">Copy Key</button>
-                    </div>
-                `;
-                messageDiv.className = 'hero-message success';
-                messageDiv.style.display = 'block';
-                
-                // Hide form and bypass link
-                form.style.display = 'none';
-                if (bypassLink) bypassLink.style.display = 'none';
-                
-                // Display success toaster for 10 seconds
-                // After 10 seconds, hide the toaster and simulate X button click
-                setTimeout(() => {
-                    messageDiv.style.display = 'none';
-                    
-                    // Then simulate clicking the X button to close the terminal box
-                    const closeButton = document.querySelector('.terminal-close');
-                    if (closeButton) {
-                        closeButton.click();
-                    }
-                }, 10000); // 10 seconds
-                
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'GET EARLY ACCESS NOW';
-                return; // Exit early, no need for try/catch
-            }
 
             try {
-                // Generate a simple token for the request
-                const token = Math.random().toString(36).substr(2, 15);
+                // Determine the API endpoint based on environment
+                const isLocalhost = window.location.hostname === 'localhost' || 
+                                   window.location.hostname === '127.0.0.1';
+                const apiUrl = isLocalhost 
+                    ? 'http://localhost:5001/newsletter/subscribe'
+                    : 'https://galaxy.staratlas.com/newsletter/subscribe';
                 
-                const response = await fetch('/api/v1/subscribe', {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
-                        Accept: 'application/json',
+                        'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
                     mode: 'cors',
                     cache: 'no-cache',
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
-                        email: email, 
-                        method: 'register', 
-                        token: token 
+                        email: email
+                        // captchaToken is optional, not sending for now
                     })
                 });
                 
                 const data = await response.json();
                 
-                if (data.success) {
-                    // Generate a mock early access key for successful subscription
-                    const accessKey = 'STAR-ATLAS-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                if (response.ok) {
+                    // Use the game code from response if available, otherwise generate one
+                    const accessKey = data.gameCode || 'STAR-ATLAS-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    const successMessage = data.gameCodeMessage || 'Success! Your early access key:';
+                    
                     messageDiv.innerHTML = `
                         <div class="success-inline">
-                            <p>Success! Your early access key: <strong>${accessKey}</strong></p>
+                            <p>${successMessage} <strong>${accessKey}</strong></p>
                             <button onclick="copyAccessKeyInline('${accessKey}')" class="copy-btn-inline">Copy Key</button>
+                            <p style="margin-top: 1rem; font-size: 0.875rem; color: #fbbf24; font-weight: 600;">
+                                ⚠️ Save this code now - this is the only time you'll see it!
+                            </p>
                         </div>
                     `;
                     messageDiv.className = 'hero-message success';
@@ -1085,35 +1051,33 @@
                     form.style.display = 'none';
                     if (bypassLink) bypassLink.style.display = 'none';
                     
-                    // Display success toaster for 10 seconds
+                    // Display success message permanently
                     messageDiv.style.display = 'block';
                     
-                    // After 10 seconds, hide the toaster
-                    setTimeout(() => {
-                        messageDiv.style.display = 'none';
-                        
-                        // Then simulate clicking the X button to close the terminal box
-                        const closeButton = document.querySelector('.terminal-close');
-                        if (closeButton) {
-                            closeButton.click();
-                        }
-                    }, 10000); // 10 seconds
-                } else if (data.code && data.code == 409) {
-                    messageDiv.textContent = 'This email is already registered.';
-                    messageDiv.className = 'hero-message error';
-                    messageDiv.style.display = 'block';
-                } else if (data.code && data.code == 429) {
-                    messageDiv.textContent = 'Too many requests. Please try again later.';
+                    // Mark that we have a successful submission to prevent closing
+                    window.hasSuccessfulSubmission = true;
+                    
+                    // Disable the close button
+                    const closeButton = document.querySelector('.terminal-close');
+                    if (closeButton) {
+                        closeButton.style.opacity = '0.3';
+                        closeButton.style.cursor = 'not-allowed';
+                        closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+                    }
+                } else if (response.status === 400 && data.error) {
+                    // Handle already subscribed error
+                    messageDiv.textContent = data.error || 'This email is already registered.';
                     messageDiv.className = 'hero-message error';
                     messageDiv.style.display = 'block';
                 } else {
-                    messageDiv.textContent = 'An error occurred. Please try again.';
+                    // Handle other errors
+                    messageDiv.textContent = data.error || 'An error occurred. Please try again.';
                     messageDiv.className = 'hero-message error';
                     messageDiv.style.display = 'block';
                 }
             } catch (error) {
                 console.error('Error:', error);
-                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.textContent = 'Connection error. Please try again.';
                 messageDiv.className = 'hero-message error';
                 messageDiv.style.display = 'block';
             } finally {
@@ -1163,6 +1127,19 @@
         // Bypass email gate function
         function bypassEmailGate(e) {
             e.preventDefault();
+            
+            // Prevent closing if there's a successful submission
+            if (window.hasSuccessfulSubmission) {
+                const closeButton = e.target.closest('.terminal-close');
+                if (closeButton) {
+                    // Show a visual feedback that it can't be closed
+                    closeButton.style.animation = 'shake 0.3s ease-in-out';
+                    setTimeout(() => {
+                        closeButton.style.animation = '';
+                    }, 300);
+                }
+                return;
+            }
             
             const terminalBox = document.querySelector('.terminal-box');
             const heroContent = document.getElementById('heroContent');
@@ -1321,28 +1298,31 @@
             submitBtn.textContent = 'Submitting...';
 
             try {
-                // Generate a simple token for the request
-                const token = Math.random().toString(36).substr(2, 15);
+                // Determine the API endpoint based on environment
+                const isLocalhost = window.location.hostname === 'localhost' || 
+                                   window.location.hostname === '127.0.0.1';
+                const apiUrl = isLocalhost 
+                    ? 'http://localhost:5001/newsletter/subscribe'
+                    : 'https://galaxy.staratlas.com/newsletter/subscribe';
                 
-                const response = await fetch('/api/v1/subscribe', {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
-                        Accept: 'application/json',
+                        'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
                     mode: 'cors',
                     cache: 'no-cache',
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
-                        email: email, 
-                        method: 'register', 
-                        token: token 
+                        email: email
+                        // captchaToken is optional, not sending for now
                     })
                 });
                 
                 const data = await response.json();
                 
-                if (data.success) {
+                if (response.ok) {
                     // Mark as submitted
                     localStorage.setItem('earlyAccessSubmitted', 'true');
                     hasSubmittedEmail = true;
@@ -1356,17 +1336,45 @@
                     submitBtn.textContent = 'Success!';
                     submitBtn.style.background = '#10b981';
                     
-                    // Also submit the main form if it exists
+                    // Also show the game code in the main hero section
                     const mainEmailInput = document.getElementById('heroEmailInput');
-                    if (mainEmailInput) {
+                    if (mainEmailInput && data.gameCode) {
                         mainEmailInput.value = email;
-                        const mainForm = mainEmailInput.closest('form');
-                        if (mainForm) {
-                            mainForm.dispatchEvent(new Event('submit'));
+                        const messageDiv = document.getElementById('heroMessage');
+                        if (messageDiv) {
+                            const successMessage = data.gameCodeMessage || 'Success! Your early access key:';
+                            messageDiv.innerHTML = `
+                                <div class="success-inline">
+                                    <p>${successMessage} <strong>${data.gameCode}</strong></p>
+                                    <button onclick="copyAccessKeyInline('${data.gameCode}')" class="copy-btn-inline">Copy Key</button>
+                                    <p style="margin-top: 1rem; font-size: 0.875rem; color: #fbbf24; font-weight: 600;">
+                                        ⚠️ Save this code now - this is the only time you'll see it!
+                                    </p>
+                                </div>
+                            `;
+                            messageDiv.className = 'hero-message success';
+                            messageDiv.style.display = 'block';
+                            
+                            // Mark that we have a successful submission to prevent closing
+                            window.hasSuccessfulSubmission = true;
+                            
+                            // Hide the form
+                            const mainForm = mainEmailInput.closest('form');
+                            if (mainForm) {
+                                mainForm.style.display = 'none';
+                            }
+                            
+                            // Disable the close button
+                            const closeButton = document.querySelector('.terminal-close');
+                            if (closeButton) {
+                                closeButton.style.opacity = '0.3';
+                                closeButton.style.cursor = 'not-allowed';
+                                closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+                            }
                         }
                     }
-                } else if (data.code && data.code == 409) {
-                    // Email already registered - still show success
+                } else if (response.status === 400 && data.error && data.error.includes('already subscribed')) {
+                    // Email already registered - still show success to avoid revealing emails
                     localStorage.setItem('earlyAccessSubmitted', 'true');
                     hasSubmittedEmail = true;
                     
@@ -1378,18 +1386,12 @@
                     // Show success message
                     submitBtn.textContent = 'Success!';
                     submitBtn.style.background = '#10b981';
-                } else if (data.code && data.code == 429) {
-                    // Re-enable form on rate limit error
-                    emailInput.disabled = false;
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'GET ACCESS NOW';
-                    alert('Too many requests. Please try again later.');
                 } else {
                     // Re-enable form on other errors
                     emailInput.disabled = false;
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'GET ACCESS NOW';
-                    alert('An error occurred. Please try again.');
+                    alert(data.error || 'An error occurred. Please try again.');
                 }
                 
             } catch (error) {
@@ -1398,7 +1400,7 @@
                 emailInput.disabled = false;
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'GET ACCESS NOW';
-                alert('An error occurred. Please try again.');
+                alert('Connection error. Please try again.');
             }
         }
 
@@ -1564,9 +1566,19 @@
             submitBtn.textContent = 'Submitting...';
             
             try {
-                const response = await fetch('/api/early-access', {
+                // Determine the API endpoint based on environment
+                const isLocalhost = window.location.hostname === 'localhost' || 
+                                   window.location.hostname === '127.0.0.1';
+                const apiUrl = isLocalhost 
+                    ? 'http://localhost:5001/newsletter/subscribe'
+                    : 'https://galaxy.staratlas.com/newsletter/subscribe';
+                
+                const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json' 
+                    },
                     body: JSON.stringify({ email })
                 });
                 
@@ -1576,9 +1588,19 @@
                     // Show success message with key
                     formContainer.style.display = 'none';
                     successMsg.style.display = 'block';
-                    document.getElementById('accessKey').textContent = data.key || 'STAR-ATLAS-KEY-XXXX';
+                    const accessKey = data.gameCode || 'STAR-ATLAS-KEY-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    document.getElementById('accessKey').textContent = accessKey;
+                    
+                    // Add warning message if it doesn't exist
+                    if (!successMsg.querySelector('.warning-message')) {
+                        const warningP = document.createElement('p');
+                        warningP.className = 'warning-message';
+                        warningP.style.cssText = 'margin-top: 1rem; font-size: 0.875rem; color: #fbbf24; font-weight: 600; text-align: center;';
+                        warningP.innerHTML = '⚠️ Save this code now - this is the only time you\'ll see it!';
+                        successMsg.appendChild(warningP);
+                    }
                 } else {
-                    errorMsg.textContent = data.message || 'An error occurred. Please try again.';
+                    errorMsg.textContent = data.error || 'An error occurred. Please try again.';
                     errorMsg.style.display = 'block';
                 }
             } catch (error) {
