@@ -7,10 +7,6 @@ on:
 jobs:
   release:
     runs-on: warp-ubuntu-latest-x64-4x
-    strategy:
-      matrix:
-        environment: [ dev, prod ]
-    environment: ${{ matrix.environment }}
     steps:
       - uses: actions/checkout@v5
       - name: Build static site
@@ -20,7 +16,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist-${{ matrix.environment }}
+          name: dist
           path: dist/
 
   deploy-dev:
@@ -29,7 +25,7 @@ jobs:
     with:
       environment: 'dev'
       bucket-name: 'www.dev.staratlas.cloud'
-      artifact-name: 'dist-dev'
+      artifact-name: 'dist'
       use-dummy-landing: true
       dummy-title: 'Star Atlas'
       dummy-message: 'Coming soon...'
@@ -41,7 +37,7 @@ jobs:
     with:
       environment: 'prod'
       bucket-name: 'www.staratlas.com'
-      artifact-name: 'dist-prod'
+      artifact-name: 'dist'
       use-dummy-landing: true
       dummy-title: 'Star Atlas'
       dummy-message: 'Coming soon...'
