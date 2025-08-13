@@ -4,7 +4,7 @@ inputs:
   bucket-name:
     required: true
   src-dir:
-    required: true
+    required: false
     default: 'dist'
   gcp-auth-key:
     required: true
@@ -21,9 +21,9 @@ runs:
     - uses: google-github-actions/setup-gcloud@v2
 
     - shell: bash
-       run: |
-         gsutil -m rsync -r -x index.html ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
-         gsutil -m setmeta -h "Cache-Control:max-age=15552000" gs://${{ inputs.bucket-name }}/*
-         gsutil cp ${{ inputs.src-dir }}/index.html gs://${{ inputs.bucket-name }}/
-         gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/index.html
-         gsutil -m rsync -r -d ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
+      run: |
+        gsutil -m rsync -r -x index.html ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
+        gsutil -m setmeta -h "Cache-Control:max-age=15552000" gs://${{ inputs.bucket-name }}/*
+        gsutil cp ${{ inputs.src-dir }}/index.html gs://${{ inputs.bucket-name }}/
+        gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/index.html
+        gsutil -m rsync -r -d ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
