@@ -8,8 +8,9 @@ on:
 jobs:
   build:
     runs-on: warp-ubuntu-latest-x64-4x
+    environment: dev
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/build-install
         with:
           galaxy-url: ${{ secrets.GALAXY_URL }}
