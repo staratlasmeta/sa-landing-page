@@ -30,6 +30,9 @@ jobs:
       environment: 'dev'
       bucket-name: 'www.dev.staratlas.cloud'
       artifact-name: 'dist-dev'
+      use-dummy-landing: true
+      dummy-title: 'Star Atlas'
+      dummy-message: 'Coming soon...'
     secrets: inherit
 
   deploy-prod:
@@ -39,4 +42,7 @@ jobs:
       environment: 'prod'
       bucket-name: 'www.staratlas.com'
       artifact-name: 'dist-prod'
+      use-dummy-landing: true
+      dummy-title: 'Star Atlas'
+      dummy-message: 'Coming soon...'
     secrets: inherit
