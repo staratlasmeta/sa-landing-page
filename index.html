@@ -1358,18 +1358,30 @@
                             // Mark that we have a successful submission to prevent closing
                             window.hasSuccessfulSubmission = true;
                             
+                            // Unlock content immediately
+                            unlockContent();
+                            
                             // Hide the form
                             const mainForm = mainEmailInput.closest('form');
                             if (mainForm) {
                                 mainForm.style.display = 'none';
                             }
                             
-                            // Disable the close button
+                            // Disable the close button temporarily (3 seconds)
                             const closeButton = document.querySelector('.terminal-close');
                             if (closeButton) {
                                 closeButton.style.opacity = '0.3';
                                 closeButton.style.cursor = 'not-allowed';
                                 closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+                                
+                                // Re-enable the close button after 3 seconds
+                                setTimeout(() => {
+                                    closeButton.style.opacity = '1';
+                                    closeButton.style.cursor = 'pointer';
+                                    closeButton.removeAttribute('title');
+                                    // Reset the flag to allow closing
+                                    window.hasSuccessfulSubmission = false;
+                                }, 3000);
                             }
                         }
                     }
