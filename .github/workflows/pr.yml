@@ -1,0 +1,15 @@
+name: build-lint-test
+
+on:
+  merge_group:
+  pull_request:
+    types: [synchronize, opened, reopened]
+
+jobs:
+  build:
+    runs-on: warp-ubuntu-latest-x64-4x
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/build-install
+        with:
+          galaxy-url: ${{ secrets.GALAXY_URL }}

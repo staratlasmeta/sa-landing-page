@@ -1,0 +1,27 @@
+name: 'Build static site'
+description: 'Prepare static assets and replace Galaxy URL'
+
+inputs:
+  galaxy-url:
+    description: 'Base URL for Galaxy service (e.g. https://galaxy.staratlas.com)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare dist folder
+      shell: bash
+      run: |
+        set -euo pipefail
+        rm -rf dist
+        mkdir -p dist
+        cp -a index.html styles.css Icon.png Icon.svg Logo.svg src dist/
+
+    - name: Inject GALAXY_URL into index.html
+      shell: bash
+      env:
+        GALAXY_URL: ${{ inputs.galaxy-url }}
+      run: |
+        set -euo pipefail
+        test -f dist/index.html
+        sed -i -E "s|https://galaxy\\.staratlas\\.com|${GALAXY_URL}|g" dist/index.html
