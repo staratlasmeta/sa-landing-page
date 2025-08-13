@@ -5,39 +5,56 @@ on:
     branches: [ 'main' ]
 
 jobs:
-  release:
+  build-dev:
     runs-on: warp-ubuntu-latest-x64-4x
+    environment: dev
     steps:
       - uses: actions/checkout@v5
-      - name: Build static site
+      - name: Build static site for dev
         uses: ./.github/actions/build-install
         with:
           galaxy-url: ${{ secrets.GALAXY_URL }}
-      - name: Upload artifact
+      - name: Upload dev artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist
+          name: dist-dev
           path: dist/
 
   deploy-dev:
-    needs: [ release ]
+    needs: [ build-dev ]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'dev'
       bucket-name: 'www.dev.staratlas.cloud'
-      artifact-name: 'dist'
+      artifact-name: 'dist-dev'
       use-dummy-landing: true
       dummy-title: 'Star Atlas'
       dummy-message: 'Coming soon...'
     secrets: inherit
 
+  build-prod:
+    runs-on: warp-ubuntu-latest-x64-4x
+    environment: prod
+    needs: [ deploy-dev ]
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build static site for prod
+        uses: ./.github/actions/build-install
+        with:
+          galaxy-url: ${{ secrets.GALAXY_URL }}
+      - name: Upload prod artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-prod
+          path: dist/
+
   deploy-prod:
-    needs: [ deploy-dev, release ]
+    needs: [ build-prod ]
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'prod'
       bucket-name: 'www.staratlas.com'
-      artifact-name: 'dist'
+      artifact-name: 'dist-prod'
       use-dummy-landing: true
       dummy-title: 'Star Atlas'
       dummy-message: 'Coming soon...'
