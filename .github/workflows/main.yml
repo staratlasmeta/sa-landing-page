@@ -4,6 +4,10 @@ on:
   push:
     branches: [ 'main' ]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   dev-build-deploy:
     runs-on: warp-ubuntu-latest-x64-4x
