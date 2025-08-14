@@ -1057,12 +1057,24 @@
                     // Mark that we have a successful submission to prevent closing
                     window.hasSuccessfulSubmission = true;
                     
-                    // Disable the close button
+                    // Unlock content immediately
+                    unlockContent();
+                    
+                    // Disable the close button temporarily (3 seconds)
                     const closeButton = document.querySelector('.terminal-close');
                     if (closeButton) {
                         closeButton.style.opacity = '0.3';
                         closeButton.style.cursor = 'not-allowed';
                         closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+                        
+                        // Re-enable the close button after 3 seconds
+                        setTimeout(() => {
+                            closeButton.style.opacity = '1';
+                            closeButton.style.cursor = 'pointer';
+                            closeButton.removeAttribute('title');
+                            // Reset the flag to allow closing
+                            window.hasSuccessfulSubmission = false;
+                        }, 7000);
                     }
                 } else if (response.status === 400 && data.error) {
                     // Handle already subscribed error
@@ -1602,6 +1614,9 @@
                     successMsg.style.display = 'block';
                     const accessKey = data.gameCode || 'STAR-ATLAS-KEY-' + Math.random().toString(36).substr(2, 8).toUpperCase();
                     document.getElementById('accessKey').textContent = accessKey;
+                    
+                    // Unlock content immediately
+                    unlockContent();
                     
                     // Add warning message if it doesn't exist
                     if (!successMsg.querySelector('.warning-message')) {
