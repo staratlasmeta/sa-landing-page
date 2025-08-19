@@ -804,6 +804,19 @@ body.content-unlocked .hero {
     box-sizing: border-box;
 }
 
+/* Disclaimer text styling */
+.disclaimer-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.67rem;
+    text-align: center;
+    margin: 1rem 0 0 0;
+    font-family: 'Tabular', monospace;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    padding: 0;
+}
+
 /* Terminal Footer with Log Line */
 .terminal-footer {
     background: rgba(0, 0, 0, 0.3);
