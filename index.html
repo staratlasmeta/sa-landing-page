@@ -492,7 +492,8 @@
         // Replace with your actual site key after deployment
         const RECAPTCHA_SITE_KEY = '6Le7F7wrAAAAAM4k6Si7pbUineErUFaiBfh8peDy';
     </script>
-    <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+    <!-- reCAPTCHA v3 requires the site key in the render param -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le7F7wrAAAAAM4k6Si7pbUineErUFaiBfh8peDy"></script>
 
     <script>
         // reCAPTCHA v3 state and helpers
