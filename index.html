@@ -106,7 +106,7 @@
                                 <div class="corner-bracket top-right"></div>
                                 <div class="corner-bracket bottom-left"></div>
                                 <div class="corner-bracket bottom-right"></div>
-                                <button type="submit" class="hero-submit-btn"><span>GET EARLY ACCESS NOW</span></button>
+                                <button type="submit" class="hero-submit-btn" disabled><span>GET EARLY ACCESS NOW</span></button>
                             </div>
                         </form>
                         <div class="disclaimer-text">
@@ -470,8 +470,9 @@
                             <span class="footer-email-local"></span><span class="footer-email-domain"></span>
                         </div>
                     </div>
-                    <button type="submit" class="footer-submit-btn">GET ACCESS NOW</button>
+                    <button type="submit" class="footer-submit-btn" disabled>GET ACCESS NOW</button>
                 </form>
+                <div id="footerMessage" class="footer-message" style="margin-top: 0.5rem; color: #f87171; font-size: 0.875rem; display: none;"></div>
             </div>
             <div class="footer-timestamp">
                 <span class="footer-log-prefix">STAR.ATLAS LOG</span>
@@ -486,7 +487,69 @@
         </div>
     </div>
 
+    <!-- Google reCAPTCHA v3 (invisible) -->
     <script>
+        // Replace with your actual site key after deployment
+        const RECAPTCHA_SITE_KEY = '6Le7F7wrAAAAAM4k6Si7pbUineErUFaiBfh8peDy';
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+
+    <script>
+        // reCAPTCHA v3 state and helpers
+        let heroRecaptchaToken = '';
+        let footerRecaptchaToken = '';
+        let heroTokenTime = 0;
+        let footerTokenTime = 0;
+        const TOKEN_TTL_MS = 110000; // refresh before 2 min expiry
+
+        function tokenExpired(ts) {
+            return !ts || (Date.now() - ts) > TOKEN_TTL_MS;
+        }
+
+        function waitForRecaptchaReady() {
+            return new Promise(resolve => {
+                if (window.grecaptcha && window.grecaptcha.ready) {
+                    grecaptcha.ready(() => resolve());
+                } else {
+                    const id = setInterval(() => {
+                        if (window.grecaptcha && window.grecaptcha.ready) {
+                            clearInterval(id);
+                            grecaptcha.ready(() => resolve());
+                        }
+                    }, 50);
+                }
+            });
+        }
+
+        async function fetchHeroToken() {
+            await waitForRecaptchaReady();
+            try {
+                const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'hero_signup' });
+                heroRecaptchaToken = token;
+                heroTokenTime = Date.now();
+                const btn = document.querySelector('.hero-submit-btn');
+                if (btn) btn.disabled = false;
+                return token;
+            } catch (e) {
+                console.error('reCAPTCHA hero error', e);
+                return null;
+            }
+        }
+
+        async function fetchFooterToken() {
+            await waitForRecaptchaReady();
+            try {
+                const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'footer_signup' });
+                footerRecaptchaToken = token;
+                footerTokenTime = Date.now();
+                const btn = document.querySelector('.footer-submit-btn');
+                if (btn) btn.disabled = false;
+                return token;
+            } catch (e) {
+                console.error('reCAPTCHA footer error', e);
+                return null;
+            }
+        }
         // Toggle game content
         function showGameMode(mode) {
             document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
@@ -1004,6 +1067,17 @@
             const messageDiv = document.getElementById('heroMessage');
             const form = document.querySelector('.early-access-form');
             const bypassLink = document.querySelector('.bypass-link');
+
+            // Ensure captcha token is present and fresh (reCAPTCHA v3)
+            if (!heroRecaptchaToken || tokenExpired(heroTokenTime)) {
+                const token = await fetchHeroToken();
+                if (!token) {
+                    messageDiv.textContent = 'reCAPTCHA failed. Please try again.';
+                    messageDiv.className = 'hero-message error';
+                    messageDiv.style.display = 'block';
+                    return;
+                }
+            }
             
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
@@ -1027,8 +1101,8 @@
                     cache: 'no-cache',
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
-                        email: email
-                        // captchaToken is optional, not sending for now
+                        email: email,
+                        captchaToken: heroRecaptchaToken
                     })
                 });
                 
@@ -1079,16 +1153,28 @@
                             window.hasSuccessfulSubmission = false;
                         }, 7000);
                     }
-                } else if (response.status === 400 && data.error) {
-                    // Handle already subscribed error
-                    messageDiv.textContent = data.error || 'This email is already registered.';
-                    messageDiv.className = 'hero-message error';
-                    messageDiv.style.display = 'block';
                 } else {
-                    // Handle other errors
-                    messageDiv.textContent = data.error || 'An error occurred. Please try again.';
-                    messageDiv.className = 'hero-message error';
-                    messageDiv.style.display = 'block';
+                    const errText = (data && (data.error || data.message)) || '';
+                    if (response.status === 403 || /captcha|recaptcha|verification/i.test(errText)) {
+                        // Explicit verification failure handling
+                        messageDiv.textContent = 'Verification failed. Please try again.';
+                        messageDiv.className = 'hero-message error';
+                        messageDiv.style.display = 'block';
+                        // Invalidate and refresh token
+                        heroRecaptchaToken = '';
+                        heroTokenTime = 0;
+                        fetchHeroToken();
+                    } else if (response.status === 400 && /already/i.test(errText)) {
+                        // Handle already subscribed error
+                        messageDiv.textContent = errText || 'This email is already registered.';
+                        messageDiv.className = 'hero-message error';
+                        messageDiv.style.display = 'block';
+                    } else {
+                        // Handle other errors
+                        messageDiv.textContent = errText || 'An error occurred. Please try again.';
+                        messageDiv.className = 'hero-message error';
+                        messageDiv.style.display = 'block';
+                    }
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -1194,16 +1280,25 @@
         function updateEmailDisplay(input) {
             const display = document.getElementById('emailDisplay');
             const value = input.value;
-            
+
             if (value.includes('@')) {
                 const [localPart, domainPart] = value.split('@');
                 display.innerHTML = `<span class="email-local">${localPart}</span><span class="email-domain">@${domainPart}</span>`;
             } else {
                 display.innerHTML = `<span class="email-local">${value}</span>`;
             }
-            
+
             // Show/hide display based on input
             display.style.opacity = value ? '1' : '0';
+            if (!value) {
+                const btn = document.querySelector('.hero-submit-btn');
+                if (btn) btn.disabled = true;
+            }
+
+            // Kick off reCAPTCHA v3 token fetch on first typing
+            if (value && (!heroRecaptchaToken || tokenExpired(heroTokenTime))) {
+                fetchHeroToken();
+            }
         }
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -1283,6 +1378,15 @@
                     footerEmailLocal.textContent = value;
                     footerEmailDomain.textContent = '';
                     footerEmailDisplay.style.opacity = value ? '1' : '0';
+                    if (!value) {
+                        const btn = document.querySelector('.footer-submit-btn');
+                        if (btn) btn.disabled = true;
+                    }
+                }
+
+                // Kick off reCAPTCHA v3 token fetch on first typing
+                if (value && (!footerRecaptchaToken || tokenExpired(footerTokenTime))) {
+                    fetchFooterToken();
                 }
             });
 
@@ -1306,6 +1410,22 @@
             const emailInput = form.querySelector('.footer-email-input');
             const submitBtn = form.querySelector('.footer-submit-btn');
             const email = emailInput.value;
+            const messageDiv = document.getElementById('footerMessage');
+
+            // Reset inline message
+            if (messageDiv) {
+                messageDiv.textContent = '';
+                messageDiv.style.display = 'none';
+            }
+
+            // Ensure captcha token is present and fresh (reCAPTCHA v3)
+            if (!footerRecaptchaToken || tokenExpired(footerTokenTime)) {
+                const token = await fetchFooterToken();
+                if (!token) {
+                    alert('reCAPTCHA failed. Please try again.');
+                    return;
+                }
+            }
 
             // Disable form during submission
             emailInput.disabled = true;
@@ -1330,8 +1450,8 @@
                     cache: 'no-cache',
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
-                        email: email
-                        // captchaToken is optional, not sending for now
+                        email: email,
+                        captchaToken: footerRecaptchaToken
                     })
                 });
                 
@@ -1414,11 +1534,26 @@
                     submitBtn.textContent = 'Success!';
                     submitBtn.style.background = '#10b981';
                 } else {
-                    // Re-enable form on other errors
-                    emailInput.disabled = false;
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'GET ACCESS NOW';
-                    alert(data.error || 'An error occurred. Please try again.');
+                // Re-enable form on other errors
+                emailInput.disabled = false;
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'GET ACCESS NOW';
+                const errText = (data && (data.error || data.message)) || '';
+                if (response.status === 403 || /captcha|recaptcha|verification/i.test(errText)) {
+                    if (messageDiv) {
+                        messageDiv.textContent = 'Verification failed. Please try again.';
+                        messageDiv.style.display = 'block';
+                    }
+                    // Refresh token for another attempt
+                    footerRecaptchaToken = '';
+                    footerTokenTime = 0;
+                    fetchFooterToken();
+                } else {
+                    if (messageDiv) {
+                        messageDiv.textContent = errText || 'An error occurred. Please try again.';
+                        messageDiv.style.display = 'block';
+                    }
+                }
                 }
                 
             } catch (error) {
@@ -1427,7 +1562,10 @@
                 emailInput.disabled = false;
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'GET ACCESS NOW';
-                alert('Connection error. Please try again.');
+                if (messageDiv) {
+                    messageDiv.textContent = 'Connection error. Please try again.';
+                    messageDiv.style.display = 'block';
+                }
             }
         }
 
