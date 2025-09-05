@@ -4334,3 +4334,25 @@ body.footer-bar-visible footer {
         max-width: 100vw !important;
     }
 }
+
+/* reCAPTCHA v2 Styles */
+#hero-recaptcha,
+#footer-recaptcha {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure reCAPTCHA doesn't interfere with form layout */
+#hero-recaptcha {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#footer-recaptcha {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}

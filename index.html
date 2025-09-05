@@ -109,6 +109,8 @@
                                 <button type="submit" class="hero-submit-btn" disabled><span>GET EARLY ACCESS NOW</span></button>
                             </div>
                         </form>
+                        <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
+                        <div id="hero-recaptcha" style="display: none; margin: 15px 0;"></div>
                         <div class="disclaimer-text">
                             By entering your email, you agree to receive our updates and promotions. <br /> You can unsubscribe anytime.
                         </div>
@@ -472,6 +474,8 @@
                     </div>
                     <button type="submit" class="footer-submit-btn" disabled>GET ACCESS NOW</button>
                 </form>
+                <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
+                <div id="footer-recaptcha" style="display: none; margin: 15px 0;"></div>
                 <div id="footerMessage" class="footer-message" style="margin-top: 0.5rem; color: #f87171; font-size: 0.875rem; display: none;"></div>
             </div>
             <div class="footer-timestamp">
@@ -487,68 +491,65 @@
         </div>
     </div>
 
-    <!-- Google reCAPTCHA v3 (invisible) -->
+    <!-- Google reCAPTCHA v2 (checkbox) -->
     <script>
         // Replace with your actual site key after deployment
-        const RECAPTCHA_SITE_KEY = '6Le7F7wrAAAAAM4k6Si7pbUineErUFaiBfh8peDy';
+        const RECAPTCHA_SITE_KEY = '6LdVZr8rAAAAAJbWKO1nEyTcFVDLIXgAsMWHp0Ll';
     </script>
-    <!-- reCAPTCHA v3 requires the site key in the render param -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Le7F7wrAAAAAM4k6Si7pbUineErUFaiBfh8peDy"></script>
+    <!-- reCAPTCHA v2 script -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
     <script>
-        // reCAPTCHA v3 state and helpers
-        let heroRecaptchaToken = '';
-        let footerRecaptchaToken = '';
-        let heroTokenTime = 0;
-        let footerTokenTime = 0;
-        const TOKEN_TTL_MS = 110000; // refresh before 2 min expiry
+        // reCAPTCHA v2 state and helpers
+        let heroRecaptchaWidgetId = null;
+        let footerRecaptchaWidgetId = null;
+        let heroRecaptchaResponse = '';
+        let footerRecaptchaResponse = '';
 
-        function tokenExpired(ts) {
-            return !ts || (Date.now() - ts) > TOKEN_TTL_MS;
-        }
-
-        function waitForRecaptchaReady() {
-            return new Promise(resolve => {
-                if (window.grecaptcha && window.grecaptcha.ready) {
-                    grecaptcha.ready(() => resolve());
-                } else {
-                    const id = setInterval(() => {
-                        if (window.grecaptcha && window.grecaptcha.ready) {
-                            clearInterval(id);
-                            grecaptcha.ready(() => resolve());
-                        }
-                    }, 50);
-                }
-            });
-        }
-
-        async function fetchHeroToken() {
-            await waitForRecaptchaReady();
-            try {
-                const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'hero_signup' });
-                heroRecaptchaToken = token;
-                heroTokenTime = Date.now();
-                const btn = document.querySelector('.hero-submit-btn');
-                if (btn) btn.disabled = false;
-                return token;
-            } catch (e) {
-                console.error('reCAPTCHA hero error', e);
-                return null;
+        // Initialize reCAPTCHA v2 widgets when ready
+        function onloadCallback() {
+            // Initialize hero form reCAPTCHA (but keep it hidden initially)
+            const heroContainer = document.getElementById('hero-recaptcha');
+            if (heroContainer && window.grecaptcha) {
+                heroRecaptchaWidgetId = grecaptcha.render('hero-recaptcha', {
+                    'sitekey': RECAPTCHA_SITE_KEY,
+                    'callback': function(response) {
+                        heroRecaptchaResponse = response;
+                        console.log('Hero reCAPTCHA verified');
+                        // Enable submit button when captcha is verified
+                        const btn = document.querySelector('.hero-submit-btn');
+                        if (btn) btn.disabled = false;
+                    },
+                    'expired-callback': function() {
+                        heroRecaptchaResponse = '';
+                        console.log('Hero reCAPTCHA expired');
+                        // Disable submit button when captcha expires
+                        const btn = document.querySelector('.hero-submit-btn');
+                        if (btn) btn.disabled = true;
+                    }
+                });
             }
-        }
 
-        async function fetchFooterToken() {
-            await waitForRecaptchaReady();
-            try {
-                const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'footer_signup' });
-                footerRecaptchaToken = token;
-                footerTokenTime = Date.now();
-                const btn = document.querySelector('.footer-submit-btn');
-                if (btn) btn.disabled = false;
-                return token;
-            } catch (e) {
-                console.error('reCAPTCHA footer error', e);
-                return null;
+            // Initialize footer form reCAPTCHA (but keep it hidden initially)
+            const footerContainer = document.getElementById('footer-recaptcha');
+            if (footerContainer && window.grecaptcha) {
+                footerRecaptchaWidgetId = grecaptcha.render('footer-recaptcha', {
+                    'sitekey': RECAPTCHA_SITE_KEY,
+                    'callback': function(response) {
+                        footerRecaptchaResponse = response;
+                        console.log('Footer reCAPTCHA verified');
+                        // Enable submit button when captcha is verified
+                        const btn = document.querySelector('.footer-submit-btn');
+                        if (btn) btn.disabled = false;
+                    },
+                    'expired-callback': function() {
+                        footerRecaptchaResponse = '';
+                        console.log('Footer reCAPTCHA expired');
+                        // Disable submit button when captcha expires
+                        const btn = document.querySelector('.footer-submit-btn');
+                        if (btn) btn.disabled = true;
+                    }
+                });
             }
         }
         // Toggle game content
@@ -1069,15 +1070,12 @@
             const form = document.querySelector('.early-access-form');
             const bypassLink = document.querySelector('.bypass-link');
 
-            // Ensure captcha token is present and fresh (reCAPTCHA v3)
-            if (!heroRecaptchaToken || tokenExpired(heroTokenTime)) {
-                const token = await fetchHeroToken();
-                if (!token) {
-                    messageDiv.textContent = 'reCAPTCHA failed. Please try again.';
-                    messageDiv.className = 'hero-message error';
-                    messageDiv.style.display = 'block';
-                    return;
-                }
+            // Check if reCAPTCHA v2 is verified
+            if (!heroRecaptchaResponse) {
+                messageDiv.textContent = 'Please complete the reCAPTCHA verification.';
+                messageDiv.className = 'hero-message error';
+                messageDiv.style.display = 'block';
+                return;
             }
             
             submitBtn.disabled = true;
@@ -1103,7 +1101,7 @@
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
                         email: email,
-                        captchaToken: heroRecaptchaToken
+                        captchaToken: heroRecaptchaResponse
                     })
                 });
                 
@@ -1291,14 +1289,28 @@
 
             // Show/hide display based on input
             display.style.opacity = value ? '1' : '0';
-            if (!value) {
+            
+            // Show/hide reCAPTCHA v2 checkbox based on input
+            const recaptchaContainer = document.getElementById('hero-recaptcha');
+            if (recaptchaContainer) {
+                if (value) {
+                    // Show reCAPTCHA when user types
+                    recaptchaContainer.style.display = 'block';
+                } else {
+                    // Hide reCAPTCHA when input is empty
+                    recaptchaContainer.style.display = 'none';
+                    // Reset the reCAPTCHA if it was previously verified
+                    if (heroRecaptchaWidgetId !== null && window.grecaptcha) {
+                        grecaptcha.reset(heroRecaptchaWidgetId);
+                        heroRecaptchaResponse = '';
+                    }
+                }
+            }
+            
+            // Disable submit button when no input or no captcha verification
+            if (!value || !heroRecaptchaResponse) {
                 const btn = document.querySelector('.hero-submit-btn');
                 if (btn) btn.disabled = true;
-            }
-
-            // Kick off reCAPTCHA v3 token fetch on first typing
-            if (value && (!heroRecaptchaToken || tokenExpired(heroTokenTime))) {
-                fetchHeroToken();
             }
         }
         
@@ -1379,15 +1391,29 @@
                     footerEmailLocal.textContent = value;
                     footerEmailDomain.textContent = '';
                     footerEmailDisplay.style.opacity = value ? '1' : '0';
-                    if (!value) {
-                        const btn = document.querySelector('.footer-submit-btn');
-                        if (btn) btn.disabled = true;
+                }
+
+                // Show/hide reCAPTCHA v2 checkbox based on input
+                const recaptchaContainer = document.getElementById('footer-recaptcha');
+                if (recaptchaContainer) {
+                    if (value) {
+                        // Show reCAPTCHA when user types
+                        recaptchaContainer.style.display = 'block';
+                    } else {
+                        // Hide reCAPTCHA when input is empty
+                        recaptchaContainer.style.display = 'none';
+                        // Reset the reCAPTCHA if it was previously verified
+                        if (footerRecaptchaWidgetId !== null && window.grecaptcha) {
+                            grecaptcha.reset(footerRecaptchaWidgetId);
+                            footerRecaptchaResponse = '';
+                        }
                     }
                 }
 
-                // Kick off reCAPTCHA v3 token fetch on first typing
-                if (value && (!footerRecaptchaToken || tokenExpired(footerTokenTime))) {
-                    fetchFooterToken();
+                // Disable submit button when no input or no captcha verification
+                if (!value || !footerRecaptchaResponse) {
+                    const btn = document.querySelector('.footer-submit-btn');
+                    if (btn) btn.disabled = true;
                 }
             });
 
@@ -1419,13 +1445,13 @@
                 messageDiv.style.display = 'none';
             }
 
-            // Ensure captcha token is present and fresh (reCAPTCHA v3)
-            if (!footerRecaptchaToken || tokenExpired(footerTokenTime)) {
-                const token = await fetchFooterToken();
-                if (!token) {
-                    alert('reCAPTCHA failed. Please try again.');
-                    return;
+            // Check if reCAPTCHA v2 is verified
+            if (!footerRecaptchaResponse) {
+                if (messageDiv) {
+                    messageDiv.textContent = 'Please complete the reCAPTCHA verification.';
+                    messageDiv.style.display = 'block';
                 }
+                return;
             }
 
             // Disable form during submission
@@ -1452,7 +1478,7 @@
                     credentials: 'same-origin',
                     body: JSON.stringify({ 
                         email: email,
-                        captchaToken: footerRecaptchaToken
+                        captchaToken: footerRecaptchaResponse
                     })
                 });
                 
