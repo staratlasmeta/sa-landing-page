@@ -3333,6 +3333,34 @@ body.footer-bar-visible footer {
     margin: 0;
 }
 
+/* Disclaimer text in terminal box */
+.disclaimer-text {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* Responsive spacing for desktop */
+@media (min-width: 768px) {
+    .disclaimer-text {
+        margin-top: 2.5rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* Ensure spacing between reCAPTCHA and disclaimer */
+#hero-recaptcha {
+    margin-bottom: 1rem !important;
+}
+
+#footer-recaptcha {
+    margin-bottom: 1rem !important;
+}
+
 .modal-submit {
     background: var(--primary);
     color: var(--bg-dark);

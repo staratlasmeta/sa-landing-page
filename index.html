@@ -188,9 +188,14 @@
                                 <div class="corner-bracket top-right"></div>
                                 <div class="corner-bracket bottom-left"></div>
                                 <div class="corner-bracket bottom-right"></div>
-                                <button type="submit" class="hero-submit-btn"><span>GET EARLY ACCESS NOW</span></button>
+                                <button type="submit" class="hero-submit-btn" disabled><span>GET EARLY ACCESS NOW</span></button>
                             </div>
                         </form>
+                        <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
+                        <div id="hero-recaptcha" style="display: none; margin: 15px 0;"></div>
+                        <div class="disclaimer-text">
+                            By entering your email, you agree to receive our updates and promotions. <br /> You can unsubscribe anytime.
+                        </div>
                     </div>
                     <div class="terminal-footer">
                         <div class="star-atlas-log" id="starAtlasLog">
@@ -549,8 +554,11 @@
                             <span class="footer-email-local"></span><span class="footer-email-domain"></span>
                         </div>
                     </div>
-                    <button type="submit" class="footer-submit-btn">GET ACCESS NOW</button>
+                    <button type="submit" class="footer-submit-btn" disabled>GET ACCESS NOW</button>
                 </form>
+                <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
+                <div id="footer-recaptcha" style="display: none; margin: 15px 0;"></div>
+                <div id="footerMessage" class="footer-message" style="margin-top: 0.5rem; color: #f87171; font-size: 0.875rem; display: none;"></div>
             </div>
             <div class="footer-timestamp">
                 <span class="footer-log-prefix">STAR.ATLAS LOG</span>
@@ -565,6 +573,76 @@
         </div>
     </div>
 
+    <!-- Google reCAPTCHA v2 (checkbox) -->
+    <script>
+        // Replace with your actual site key after deployment
+        var RECAPTCHA_SITE_KEY = '6LdVZr8rAAAAAJbWKO1nEyTcFVDLIXgAsMWHp0Ll';
+
+        // reCAPTCHA v2 state (global so main.js can access)
+        var heroRecaptchaWidgetId = null;
+        var footerRecaptchaWidgetId = null;
+        var heroRecaptchaResponse = '';
+        var footerRecaptchaResponse = '';
+
+        // Initialize reCAPTCHA v2 widgets when ready (called by grecaptcha onload)
+        function onloadCallback() {
+            console.log('reCAPTCHA: onloadCallback fired');
+            console.log('reCAPTCHA: origin =', window.location.origin);
+            console.log('reCAPTCHA: hostname =', window.location.hostname);
+
+            // Initialize hero form reCAPTCHA (renders even while hidden)
+            var heroContainer = document.getElementById('hero-recaptcha');
+            if (heroContainer && window.grecaptcha) {
+                try {
+                    heroRecaptchaWidgetId = grecaptcha.render('hero-recaptcha', {
+                        'sitekey': RECAPTCHA_SITE_KEY,
+                        'callback': function(response) {
+                            heroRecaptchaResponse = response;
+                            console.log('Hero reCAPTCHA verified');
+                            var btn = document.querySelector('.hero-submit-btn');
+                            if (btn) btn.disabled = false;
+                        },
+                        'expired-callback': function() {
+                            heroRecaptchaResponse = '';
+                            console.log('Hero reCAPTCHA expired');
+                            var btn = document.querySelector('.hero-submit-btn');
+                            if (btn) btn.disabled = true;
+                        }
+                    });
+                    console.log('Hero reCAPTCHA rendered successfully, widgetId:', heroRecaptchaWidgetId);
+                } catch (err) {
+                    console.error('Hero reCAPTCHA render failed:', err);
+                }
+            }
+
+            // Initialize footer form reCAPTCHA (renders even while hidden)
+            var footerContainer = document.getElementById('footer-recaptcha');
+            if (footerContainer && window.grecaptcha) {
+                try {
+                    footerRecaptchaWidgetId = grecaptcha.render('footer-recaptcha', {
+                        'sitekey': RECAPTCHA_SITE_KEY,
+                        'callback': function(response) {
+                            footerRecaptchaResponse = response;
+                            console.log('Footer reCAPTCHA verified');
+                            var btn = document.querySelector('.footer-submit-btn');
+                            if (btn) btn.disabled = false;
+                        },
+                        'expired-callback': function() {
+                            footerRecaptchaResponse = '';
+                            console.log('Footer reCAPTCHA expired');
+                            var btn = document.querySelector('.footer-submit-btn');
+                            if (btn) btn.disabled = true;
+                        }
+                    });
+                    console.log('Footer reCAPTCHA rendered successfully, widgetId:', footerRecaptchaWidgetId);
+                } catch (err) {
+                    console.error('Footer reCAPTCHA render failed:', err);
+                }
+            }
+        }
+    </script>
+    <!-- reCAPTCHA v2 script -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     <script src="src/main.js" defer></script>
 
     <!-- Legacy inline script preserved (disabled) for reference. All active logic lives in src/main.js -->

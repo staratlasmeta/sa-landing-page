@@ -22,8 +22,16 @@ runs:
 
     - shell: bash
       run: |
-        gsutil -m rsync -r -x index.html ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
-        gsutil -m setmeta -h "Cache-Control:max-age=15552000" gs://${{ inputs.bucket-name }}/*
-        gsutil cp ${{ inputs.src-dir }}/index.html gs://${{ inputs.bucket-name }}/
-        gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/index.html
+        # Sync all files to bucket (with delete for removed files)
         gsutil -m rsync -r -d ${{ inputs.src-dir }}/ gs://${{ inputs.bucket-name }}/
+        
+        # Set long cache (180 days) for static assets by default
+        gsutil -m setmeta -h "Cache-Control:public,max-age=15552000" "gs://${{ inputs.bucket-name }}/**"
+        
+        # Override with no-cache for files that change frequently
+        gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/index.html
+        gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/src/main.js
+        gsutil setmeta -h "Cache-Control:no-cache,max-age=0" gs://${{ inputs.bucket-name }}/styles.css
+        
+        # Set no-cache for all HTML files in subdirectories (game pages, etc.)
+        gsutil -m setmeta -h "Cache-Control:no-cache,max-age=0" "gs://${{ inputs.bucket-name }}/**/*.html" || true

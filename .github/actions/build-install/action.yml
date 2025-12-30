@@ -15,7 +15,7 @@ runs:
         set -euo pipefail
         rm -rf dist
         mkdir -p dist
-        cp -a index.html styles.css Icon.png Icon.svg Logo.svg src dist/
+        cp -a index.html styles.css Icon.png Icon.svg Logo.svg src game 404.html robots.txt sitemap.xml CNAME dist/
 
     - name: Inject GALAXY_URL into index.html
       shell: bash

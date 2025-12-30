@@ -11,6 +11,12 @@
   'use strict';
 
   // -----------------------------
+  // reCAPTCHA v2 state - uses global variables defined in index.html:
+  // heroRecaptchaWidgetId, footerRecaptchaWidgetId, heroRecaptchaResponse, footerRecaptchaResponse
+  // The widgets are rendered by onloadCallback() in index.html when grecaptcha loads
+  // -----------------------------
+
+  // -----------------------------
   // Game mode toggle
   // -----------------------------
 
@@ -358,7 +364,31 @@
       display.innerHTML = `<span class="email-local">${value}</span>`;
     }
 
+    // Show/hide display based on input
     display.style.opacity = value ? '1' : '0';
+
+    // Show/hide reCAPTCHA v2 checkbox based on input
+    const recaptchaContainer = document.getElementById('hero-recaptcha');
+    if (recaptchaContainer) {
+      if (value) {
+        // Show reCAPTCHA when user types
+        recaptchaContainer.style.display = 'block';
+      } else {
+        // Hide reCAPTCHA when input is empty
+        recaptchaContainer.style.display = 'none';
+        // Reset the reCAPTCHA if it was previously verified
+        if (window.heroRecaptchaWidgetId !== null && window.grecaptcha) {
+          grecaptcha.reset(window.heroRecaptchaWidgetId);
+          window.heroRecaptchaResponse = '';
+        }
+      }
+    }
+
+    // Disable submit button when no input or no captcha verification
+    if (!value || !window.heroRecaptchaResponse) {
+      const btn = document.querySelector('.hero-submit-btn');
+      if (btn) btn.disabled = true;
+    }
   }
   window.updateEmailDisplay = updateEmailDisplay;
 
@@ -387,6 +417,20 @@
 
   function bypassEmailGate(e) {
     e?.preventDefault?.();
+
+    // Prevent closing if there's a successful submission
+    if (window.hasSuccessfulSubmission) {
+      const closeButton = e?.target?.closest?.('.terminal-close');
+      if (closeButton) {
+        // Show a visual feedback that it can't be closed
+        closeButton.style.animation = 'shake 0.3s ease-in-out';
+        setTimeout(() => {
+          closeButton.style.animation = '';
+        }, 300);
+      }
+      return;
+    }
+
     const terminalBox = document.querySelector('.terminal-box');
     const heroContent = document.getElementById('heroContent');
     terminalBoxClicks++;
@@ -433,79 +477,121 @@
     const messageDiv = document.getElementById('heroMessage');
     const form = document.querySelector('.early-access-form');
     const bypassLink = document.querySelector('.bypass-link');
+    const recaptchaContainer = document.getElementById('hero-recaptcha');
 
     if (!submitBtn || !messageDiv) return;
+
+    // Check if reCAPTCHA v2 is verified
+    if (!window.heroRecaptchaResponse) {
+      messageDiv.textContent = 'Please complete the reCAPTCHA verification.';
+      messageDiv.className = 'hero-message error';
+      messageDiv.style.display = 'block';
+      return;
+    }
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
     messageDiv.style.display = 'none';
 
-    const isLocalhost =
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.hostname === '' ||
-      window.location.protocol === 'file:';
-
-    if (isLocalhost || !navigator.onLine) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const mockKey = 'TEST-KEY-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-      messageDiv.innerHTML = `
-        <div class="success-inline">
-          <p>Success! Your early access key: <strong>${mockKey}</strong></p>
-          <button onclick="copyAccessKeyInline('${mockKey}')" class="copy-btn-inline">Copy Key</button>
-        </div>
-      `;
-      messageDiv.className = 'hero-message success';
-      messageDiv.style.display = 'block';
-      if (form) form.style.display = 'none';
-      if (bypassLink) bypassLink.style.display = 'none';
-
-      setTimeout(() => {
-        messageDiv.style.display = 'none';
-        const closeButton = document.querySelector('.terminal-close');
-        if (closeButton) closeButton.click();
-      }, 10000);
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'GET EARLY ACCESS NOW';
-      return;
-    }
-
     try {
-      const response = await fetch('/api/early-access', {
+      // Determine the API endpoint based on environment
+      const isLocalhost =
+        window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const apiUrl = isLocalhost
+        ? 'http://localhost:5001/newsletter/subscribe'
+        : 'https://galaxy.staratlas.com/newsletter/subscribe';
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          email: email,
+          captchaToken: window.heroRecaptchaResponse,
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        const key = data.key || 'STAR-ATLAS-KEY-XXXX';
+        // Use the game code from response if available, otherwise generate one
+        const accessKey =
+          data.gameCode || 'STAR-ATLAS-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+        const successMessage = data.gameCodeMessage || 'Success! Your early access key:';
+
         messageDiv.innerHTML = `
           <div class="success-inline">
-            <p>Success! Your early access key: <strong>${key}</strong></p>
-            <button onclick="copyAccessKeyInline('${key}')" class="copy-btn-inline">Copy Key</button>
+            <p>${successMessage} <strong>${accessKey}</strong></p>
+            <button onclick="copyAccessKeyInline('${accessKey}')" class="copy-btn-inline">Copy Key</button>
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: #fbbf24; font-weight: 600;">
+              ⚠️ Save this code now - this is the only time you'll see it!
+            </p>
           </div>
         `;
         messageDiv.className = 'hero-message success';
+
+        // Hide form, bypass link, and recaptcha
         if (form) form.style.display = 'none';
         if (bypassLink) bypassLink.style.display = 'none';
+        if (recaptchaContainer) recaptchaContainer.style.display = 'none';
+
+        // Display success message
         messageDiv.style.display = 'block';
 
-        setTimeout(() => {
-          messageDiv.style.display = 'none';
-          const closeButton = document.querySelector('.terminal-close');
-          if (closeButton) closeButton.click();
-        }, 10000);
+        // Mark that we have a successful submission to prevent closing
+        window.hasSuccessfulSubmission = true;
+
+        // Unlock content immediately
+        unlockContent();
+
+        // Disable the close button temporarily
+        const closeButton = document.querySelector('.terminal-close');
+        if (closeButton) {
+          closeButton.style.opacity = '0.3';
+          closeButton.style.cursor = 'not-allowed';
+          closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+
+          // Re-enable the close button after 7 seconds
+          setTimeout(() => {
+            closeButton.style.opacity = '1';
+            closeButton.style.cursor = 'pointer';
+            closeButton.removeAttribute('title');
+            // Reset the flag to allow closing
+            window.hasSuccessfulSubmission = false;
+          }, 7000);
+        }
       } else {
-        messageDiv.textContent = data.message || 'An error occurred. Please try again.';
-        messageDiv.className = 'hero-message error';
-        messageDiv.style.display = 'block';
+        const errText = (data && (data.error || data.message)) || '';
+        if (response.status === 403 || /captcha|recaptcha|verification/i.test(errText)) {
+          // Explicit verification failure handling
+          messageDiv.textContent = 'Verification failed. Please try again.';
+          messageDiv.className = 'hero-message error';
+          messageDiv.style.display = 'block';
+          // Reset reCAPTCHA for another attempt
+          window.heroRecaptchaResponse = '';
+          if (window.heroRecaptchaWidgetId !== null && window.grecaptcha) {
+            grecaptcha.reset(window.heroRecaptchaWidgetId);
+          }
+        } else if (response.status === 400 && /already/i.test(errText)) {
+          // Handle already subscribed error
+          messageDiv.textContent = errText || 'This email is already registered.';
+          messageDiv.className = 'hero-message error';
+          messageDiv.style.display = 'block';
+        } else {
+          // Handle other errors
+          messageDiv.textContent = errText || 'An error occurred. Please try again.';
+          messageDiv.className = 'hero-message error';
+          messageDiv.style.display = 'block';
+        }
       }
     } catch (error) {
       console.error('Error:', error);
-      messageDiv.textContent = 'An error occurred. Please try again.';
+      messageDiv.textContent = 'Connection error. Please try again.';
       messageDiv.className = 'hero-message error';
       messageDiv.style.display = 'block';
     } finally {
@@ -543,34 +629,166 @@
     const submitBtn = form.querySelector('.footer-submit-btn');
     if (!emailInput || !submitBtn) return;
     const email = emailInput.value;
+    const messageDiv = document.getElementById('footerMessage');
 
+    // Reset inline message
+    if (messageDiv) {
+      messageDiv.textContent = '';
+      messageDiv.style.display = 'none';
+    }
+
+    // Check if reCAPTCHA v2 is verified
+    if (!window.footerRecaptchaResponse) {
+      if (messageDiv) {
+        messageDiv.textContent = 'Please complete the reCAPTCHA verification.';
+        messageDiv.style.display = 'block';
+      }
+      return;
+    }
+
+    // Disable form during submission
     emailInput.disabled = true;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      localStorage.setItem('earlyAccessSubmitted', 'true');
-      hasSubmittedEmail = true;
+      // Determine the API endpoint based on environment
+      const isLocalhost =
+        window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const apiUrl = isLocalhost
+        ? 'http://localhost:5001/newsletter/subscribe'
+        : 'https://galaxy.staratlas.com/newsletter/subscribe';
 
-      isFooterBarVisible = false;
-      footerBar?.classList.remove('visible');
-      document.body.classList.remove('footer-bar-visible');
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          email: email,
+          captchaToken: window.footerRecaptchaResponse,
+        }),
+      });
 
-      submitBtn.textContent = 'Success!';
-      submitBtn.style.background = '#10b981';
+      const data = await response.json();
 
-      const mainEmailInput = document.getElementById('heroEmailInput');
-      if (mainEmailInput) {
-        mainEmailInput.value = email;
-        const mainForm = mainEmailInput.closest('form');
-        if (mainForm) mainForm.dispatchEvent(new Event('submit'));
+      if (response.ok) {
+        // Mark as submitted
+        localStorage.setItem('earlyAccessSubmitted', 'true');
+        hasSubmittedEmail = true;
+
+        // Hide footer bar
+        isFooterBarVisible = false;
+        footerBar?.classList.remove('visible');
+        document.body.classList.remove('footer-bar-visible');
+
+        // Show success message
+        submitBtn.textContent = 'Success!';
+        submitBtn.style.background = '#10b981';
+
+        // Also show the game code in the main hero section
+        const mainEmailInput = document.getElementById('heroEmailInput');
+        if (mainEmailInput && data.gameCode) {
+          mainEmailInput.value = email;
+          const heroMessageDiv = document.getElementById('heroMessage');
+          if (heroMessageDiv) {
+            const successMessage = data.gameCodeMessage || 'Success! Your early access key:';
+            heroMessageDiv.innerHTML = `
+              <div class="success-inline">
+                <p>${successMessage} <strong>${data.gameCode}</strong></p>
+                <button onclick="copyAccessKeyInline('${data.gameCode}')" class="copy-btn-inline">Copy Key</button>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #fbbf24; font-weight: 600;">
+                  ⚠️ Save this code now - this is the only time you'll see it!
+                </p>
+              </div>
+            `;
+            heroMessageDiv.className = 'hero-message success';
+            heroMessageDiv.style.display = 'block';
+
+            // Mark that we have a successful submission to prevent closing
+            window.hasSuccessfulSubmission = true;
+
+            // Unlock content immediately
+            unlockContent();
+
+            // Hide the form
+            const mainForm = mainEmailInput.closest('form');
+            if (mainForm) {
+              mainForm.style.display = 'none';
+            }
+
+            // Hide hero recaptcha container
+            const heroRecaptchaContainer = document.getElementById('hero-recaptcha');
+            if (heroRecaptchaContainer) heroRecaptchaContainer.style.display = 'none';
+
+            // Disable the close button temporarily
+            const closeButton = document.querySelector('.terminal-close');
+            if (closeButton) {
+              closeButton.style.opacity = '0.3';
+              closeButton.style.cursor = 'not-allowed';
+              closeButton.setAttribute('title', 'Cannot close - save your access code first!');
+
+              // Re-enable the close button after 3 seconds
+              setTimeout(() => {
+                closeButton.style.opacity = '1';
+                closeButton.style.cursor = 'pointer';
+                closeButton.removeAttribute('title');
+                // Reset the flag to allow closing
+                window.hasSuccessfulSubmission = false;
+              }, 3000);
+            }
+          }
+        }
+      } else if (response.status === 400 && data.error && data.error.includes('already subscribed')) {
+        // Email already registered - still show success to avoid revealing emails
+        localStorage.setItem('earlyAccessSubmitted', 'true');
+        hasSubmittedEmail = true;
+
+        // Hide footer bar
+        isFooterBarVisible = false;
+        footerBar?.classList.remove('visible');
+        document.body.classList.remove('footer-bar-visible');
+
+        // Show success message
+        submitBtn.textContent = 'Success!';
+        submitBtn.style.background = '#10b981';
+      } else {
+        // Re-enable form on other errors
+        emailInput.disabled = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'GET ACCESS NOW';
+        const errText = (data && (data.error || data.message)) || '';
+        if (response.status === 403 || /captcha|recaptcha|verification/i.test(errText)) {
+          if (messageDiv) {
+            messageDiv.textContent = 'Verification failed. Please try again.';
+            messageDiv.style.display = 'block';
+          }
+          // Reset reCAPTCHA for another attempt
+          window.footerRecaptchaResponse = '';
+          if (window.footerRecaptchaWidgetId !== null && window.grecaptcha) {
+            grecaptcha.reset(window.footerRecaptchaWidgetId);
+          }
+        } else {
+          if (messageDiv) {
+            messageDiv.textContent = errText || 'An error occurred. Please try again.';
+            messageDiv.style.display = 'block';
+          }
+        }
       }
     } catch (error) {
+      console.error('Error:', error);
+      // Re-enable form on error
       emailInput.disabled = false;
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit';
-      alert('An error occurred. Please try again.');
+      submitBtn.textContent = 'GET ACCESS NOW';
+      if (messageDiv) {
+        messageDiv.textContent = 'Connection error. Please try again.';
+        messageDiv.style.display = 'block';
+      }
     }
   }
   window.submitFooterEmail = submitFooterEmail;
@@ -626,6 +844,29 @@
         footerEmailLocal.textContent = value;
         footerEmailDomain.textContent = '';
         footerEmailDisplay.style.opacity = value ? '1' : '0';
+      }
+
+      // Show/hide reCAPTCHA v2 checkbox based on input
+      const recaptchaContainer = document.getElementById('footer-recaptcha');
+      if (recaptchaContainer) {
+        if (value) {
+          // Show reCAPTCHA when user types
+          recaptchaContainer.style.display = 'block';
+        } else {
+          // Hide reCAPTCHA when input is empty
+          recaptchaContainer.style.display = 'none';
+          // Reset the reCAPTCHA if it was previously verified
+          if (window.footerRecaptchaWidgetId !== null && window.grecaptcha) {
+            grecaptcha.reset(window.footerRecaptchaWidgetId);
+            window.footerRecaptchaResponse = '';
+          }
+        }
+      }
+
+      // Disable submit button when no input or no captcha verification
+      if (!value || !window.footerRecaptchaResponse) {
+        const btn = document.querySelector('.footer-submit-btn');
+        if (btn) btn.disabled = true;
       }
     });
 
