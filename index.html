@@ -1,693 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Atlas | AAA Space Exploration MMO - Explore, Conquer, Earn</title>
-    <meta name="description" content="Star Atlas is a AAA space exploration MMO featuring immersive ship-to-ship and FPS combat, strategic fleet command, and a real player-driven economy built on blockchain." />
-    <meta name="keywords" content="Star Atlas, AAA MMO, space exploration, space game, MMO, blockchain game, play to earn, Solana, Galia, fleet command, sci-fi MMO, space MMO" />
-    <meta name="robots" content="index,follow" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="author" content="ATMTA, Inc." />
+    <title>Star Atlas | AAA Space Exploration MMO</title>
+    <meta name="description" content="Star Atlas is a AAA space exploration MMO built on blockchain." />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Star Atlas" />
-    <meta property="og:title" content="Star Atlas | AAA Space Exploration MMO" />
-    <meta property="og:description" content="Explore the vastness of Galia in this AAA space exploration MMO. Battle for territory, command fleets, and earn in a real player-driven economy." />
-    <meta property="og:url" content="https://staratlas.com/" />
-    <meta property="og:image" content="https://staratlas.com/Icon.png" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@staratlas" />
-    <meta name="twitter:title" content="Star Atlas | AAA Space Exploration MMO" />
-    <meta name="twitter:description" content="Explore the vastness of Galia in this AAA space exploration MMO. Battle for territory, command fleets, and earn in a real player-driven economy." />
-    <meta name="twitter:image" content="https://staratlas.com/Icon.png" />
-
-    <link rel="canonical" href="https://staratlas.com/" />
     <link rel="icon" type="image/png" href="Icon.png">
-    <link rel="apple-touch-icon" href="Icon.png">
-    <link rel="preconnect" href="https://api.fontshare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
     <!-- Structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "name": "Star Atlas",
-            "url": "https://staratlas.com",
-            "logo": "https://staratlas.com/Icon.png",
-            "sameAs": [
-              "https://twitter.com/staratlas",
-              "https://discord.gg/staratlas",
-              "https://www.youtube.com/channel/UCt-y8Npwje5KDG5MSZ0a9Jw",
-              "https://www.reddit.com/r/StarAtlas/"
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "name": "Star Atlas",
-            "url": "https://staratlas.com",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://staratlas.com/?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          },
-          {
-            "@type": "VideoGame",
-            "name": "Star Atlas",
-            "description": "Star Atlas is a AAA space exploration MMO featuring immersive ship-to-ship and FPS combat, strategic fleet command, and a real player-driven economy built on blockchain.",
-            "url": "https://staratlas.com",
-            "image": "https://staratlas.com/Icon.png",
-            "genre": ["Space Exploration", "MMO", "Strategy", "Action"],
-            "gamePlatform": ["PC", "Web Browser"],
-            "applicationCategory": "Game",
-            "operatingSystem": "Windows, macOS",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD",
-              "availability": "https://schema.org/PreOrder"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "ATMTA, Inc."
-            }
-          }
-        ]
+        "@type": "VideoGame",
+        "name": "Star Atlas",
+        "url": "https://staratlas.com",
+        "publisher": {
+          "@type": "Organization",
+          "name": "ATMTA, Inc."
+        }
       }
     </script>
 </head>
+
 <body>
-    <!-- Loading Bar -->
-    <div class="loading-bar" id="loadingBar"></div>
-    
-    <!-- Grid Background -->
-    <div class="grid-container">
-        <div class="grid-layer dots"></div>
-        <div class="grid-layer grid"></div>
-        <div class="grid-layer accent"></div>
-    </div>
-    
-    <!-- Mouse spotlight effect -->
-    <div class="mouse-spotlight"></div>
-    
-    <!-- Glow Effects -->
-    <div class="glow-container">
-        <div class="glow"></div>
-        <div class="glow"></div>
-        <div class="glow"></div>
-    </div>
-    
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
 
-
-    <!-- Navigation -->
-    <nav class="gated-content" style="display: none;">
-
-        <div class="nav-main">
-            <div class="nav-container">
-                <div class="logo">
-                    <img src="Logo.svg" alt="Star Atlas">
-                </div>
-                <ul class="nav-links">
-                    <li class="has-dropdown">
-                        <a href="#game">Game</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer">Star Atlas</a></li>
-                            <li><a href="https://based.staratlas.com/" target="_blank" rel="noopener noreferrer">SAGE Labs</a></li>
-                            <li><a href="https://holosim.staratlas.com/" target="_blank" rel="noopener noreferrer">Holosim</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="https://experience.staratlas.com" target="_blank" rel="noopener noreferrer">Experience</a></li>
-                    <li><a href="https://experience.staratlas.com/newsroom" target="_blank" rel="noopener noreferrer">News & Info</a></li>
-                    <li><a href="https://experience.staratlas.com/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
-                </ul>
-                <div class="nav-cta">
-                    <a href="https://play.staratlas.com/market/" target="_blank" rel="noopener noreferrer" class="download-btn"><span>Galactic Marketplace</span></a>
-                </div>
-            </div>
+    <nav class="nav-shell">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="Logo.svg" alt="Star Atlas">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#game" class="nav-link">Game Modes</a></li>
+                <li><a href="#economy" class="nav-link">Economy</a></li>
+                <li><a href="#community" class="nav-link">Community</a></li>
+            </ul>
+            <a href="https://play.staratlas.com/market/" target="_blank" class="btn btn-secondary">Marketplace</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <!-- Video Background -->
-        <video class="video-background" autoplay muted loop playsinline preload="auto">
+        <video class="hero-video-bg" autoplay muted loop playsinline>
             <source src="src/herosection_loop_7-21-hb3.mp4" type="video/mp4">
         </video>
-        <div class="video-overlay"></div>
-        
+        <div class="hero-overlay"></div>
+
         <div class="hero-content center-bottom" id="heroContent">
-            <h1 class="sr-only">Star Atlas | AAA Space Exploration MMO - Explore, Conquer, Earn</h1>
-            <div class="hero-tagline">
+            <h1 class="hero-title sr-only">Star Atlas</h1>
+            <div class="hero-tagline sr-only">
                 <span>EXPLORE, CONQUER, AND EARN</span>
-                <span>IN A PLAYER-DRIVEN ECONOMY</span>
             </div>
-            <img src="Logo.svg" alt="Star Atlas" class="hero-logo">
-            <div class="hero-cta">
-                <div class="terminal-box">
-                    <div class="terminal-box-corners"></div>
-                    <div class="terminal-header">
-                        <div class="terminal-icon-box">
-                            <img src="Icon.svg" alt="Star Atlas" class="terminal-icon">
-                        </div>
-                        <span class="terminal-title">EARLY ACCESS</span>
-                        <button class="terminal-close" onclick="bypassEmailGate(event)" aria-label="Close">
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
+            <img src="Logo.svg" alt="Star Atlas" style="width: 240px; margin-bottom: 2rem;">
+
+            <p class="hero-subtitle">
+                Explore the vastness of Galia in a breathtaking, persistent sci-fi universe. Command fleets, conquer
+                territories, and thrive in a real player-driven economy.
+            </p>
+
+            <div class="hero-actions">
+                <!-- Premium Minimal Email Capture replacing terminal -->
+                <form class="early-access-form" onsubmit="submitEarlyAccessInline(event)">
+                    <div class="email-widget">
+                        <input type="email" id="heroEmailInput" placeholder="Enter email for Early Access" required
+                            oninput="updateEmailDisplay(this)" />
+                        <div id="emailDisplay" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary hero-submit-btn" disabled>Play Now</button>
                     </div>
-                    <div class="terminal-body">
-                        <p class="terminal-description">Enter your Email for a Star Atlas Early Access Key<br>& one copy of The Star Atlas Guide to Everything!</p>
-                        <form class="early-access-form" onsubmit="submitEarlyAccessInline(event)">
-                            <div class="email-input-wrapper">
-                                <input 
-                                    type="email" 
-                                    id="heroEmailInput" 
-                                    placeholder="Email Address" 
-                                    required
-                                    class="hero-email-input"
-                                    oninput="updateEmailDisplay(this)"
-                                />
-                                <div class="email-display" id="emailDisplay"></div>
-                            </div>
-                            <div class="button-wrapper">
-                                <div class="corner-bracket top-left"></div>
-                                <div class="corner-bracket top-right"></div>
-                                <div class="corner-bracket bottom-left"></div>
-                                <div class="corner-bracket bottom-right"></div>
-                                <button type="submit" class="hero-submit-btn" disabled><span>GET EARLY ACCESS NOW</span></button>
-                            </div>
-                        </form>
-                        <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
-                        <div id="hero-recaptcha" style="display: none; margin: 15px 0;"></div>
-                        <div class="disclaimer-text">
-                            By entering your email, you agree to receive our updates and promotions. <br /> You can unsubscribe anytime.
-                        </div>
-                    </div>
-                    <div class="terminal-footer">
-                        <div class="star-atlas-log" id="starAtlasLog">
-                            <span class="log-date">2625.07.22</span>
-                            <span class="log-time">00:00:00</span>
-                        </div>
-                    </div>
-                    <div class="bottom-corners"></div>
-                </div>
+                </form>
+
+                <div id="hero-recaptcha" style="display: none; margin-top: 1rem;"></div>
                 <div id="heroMessage" class="hero-message" style="display: none;"></div>
             </div>
         </div>
     </section>
 
+    <div class="container">
 
-
-
-
-    <!-- Gated Content Container -->
-    <div id="gatedContent" class="gated-sections" style="display: none;">
-    
-    <!-- Game Section -->
-    <section class="game-section" id="game">
-        <div class="section-corners"></div>
-        <div class="section-header">
-            <div style="display: flex; align-items: stretch;">
-                <span class="section-number">0001.</span>
-                <h2 class="section-title">GAME</h2>
+        <section class="section" id="game">
+            <div class="section-header">
+                <span class="section-eyebrow">// 0001</span>
+                <h2 class="section-title">GAME MODES</h2>
+                <p class="text-secondary" style="max-width: 600px;">
+                    Immerse yourself in the vastness of Galia. Join the fight for resources and territory with intense
+                    ship-to-ship combat and crafting.
+                </p>
             </div>
-            <div class="section-icon-wrapper">
-                <img src="Icon.svg" alt="" class="section-icon" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                <span class="section-tooltip">TO THE TOP</span>
-            </div>
-        </div>
-        <p class="section-subtitle">Immerse yourself in the vastness of Galia, where Star Atlas comes alive.</p>
-        
-        <div class="toggle-container">
-            <button class="toggle-btn active" onclick="showGameMode('3rdperson', event)">3rd Person Experience</button>
-            <button class="toggle-btn" onclick="showGameMode('rts', event)">Top-Down RTS View</button>
-        </div>
 
-        <!-- 3rd Person Content -->
-        <div id="3rdperson" class="game-content active">
-            <p style="text-align: center; color: rgba(255, 255, 255, 1); max-width: 800px; margin: 0 auto 3rem;">
-                Join the fight for resources and territory with intense ship-to-ship and FPS combat, exploration, 
-                crafting, and quests.
-            </p>
-            
-            <!-- Video Carousel -->
-            <div class="video-carousel">
-                <div class="carousel-container">
+            <div class="game-modes">
+                <button class="toggle-btn active" onclick="showGameMode('3rdperson', event)">3rd Person</button>
+                <button class="toggle-btn" onclick="showGameMode('rts', event)">RTS View</button>
+            </div>
+
+            <!-- 3rd Person -->
+            <div id="3rdperson" class="game-content active">
+                <div class="video-carousel">
                     <div class="carousel-track" id="carousel-3rd">
-                        <!-- Slide 1: Galia -->
                         <div class="carousel-slide active">
-                            <video class="carousel-video" poster="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_1_ImageThumbnail.png" autoplay muted>
+                            <video class="carousel-video"
+                                poster="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_1_ImageThumbnail.png"
+                                autoplay muted>
                                 <source src="src/GAME section/3rd Person Experience/Slide_1_Galia.mp4" type="video/mp4">
                             </video>
                             <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/galia/">Galia</a></h3>
-                                <p class="slide-description">Explore the unexplored. Take on unknown dangers. Build a galactic empire.</p>
-                                <a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
+                                <h3 class="slide-title">Galia</h3>
+                                <p class="slide-description">Explore the unexplored. Take on unknown dangers. Build a
+                                    galactic empire.</p>
                             </div>
                         </div>
-                        
-                        <!-- Slide 2: Game Modes -->
                         <div class="carousel-slide">
-                            <video class="carousel-video" poster="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_2_ImageThumbnail.png" muted>
-                                <source src="src/GAME section/3rd Person Experience/Slide_2_GameModes.mp4" type="video/mp4">
-                            </video>
+                            <video class="carousel-video"
+                                src="src/GAME section/3rd Person Experience/Slide_2_GameModes.mp4" muted></video>
                             <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/game-modes/">Game Modes</a></h3>
-                                <p class="slide-description">Conquer Galia, then crush the competition. Shooter arena battles, racing tracks, PVE dogfights and more await.</p>
-                                <a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 3: Your Fleet Your Way -->
-                        <div class="carousel-slide">
-                            <video class="carousel-video" poster="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_3_ImageThumbnail.png" muted>
-                                <source src="src/GAME section/3rd Person Experience/Slide_3_YourFleetYourWay.mp4" type="video/mp4">
-                            </video>
-                            <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/your-fleet-your-way/">Your Fleet, Your Way</a></h3>
-                                <p class="slide-description">View, build, and customize your fleet. Whether you're exploring the detailed interiors of your ships or managing your entire armada, it's all under your command.</p>
-                                <a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 4: Life in Galia -->
-                        <div class="carousel-slide">
-                            <video class="carousel-video" poster="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_4_ImageThumbnail.png" muted>
-                                <source src="src/GAME section/3rd Person Experience/Slide_4_LifeinGalia.mp4" type="video/mp4">
-                            </video>
-                            <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/life-in-galia/">Life in Galia</a></h3>
-                                <p class="slide-description">From the small, furred Punaabs to luminous beings of pure light, Galia teems with diverse life.</p>
-                                <a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
+                                <h3 class="slide-title">Game Modes</h3>
+                                <p class="slide-description">Shooter arena battles, racing tracks, PVE dogfights and
+                                    more await.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Carousel Navigation -->
                     <button class="carousel-btn carousel-prev" onclick="changeSlide('3rd', -1)">‹</button>
                     <button class="carousel-btn carousel-next" onclick="changeSlide('3rd', 1)">›</button>
-                    
-                    <!-- Carousel Indicators -->
-                    <div class="carousel-indicators">
-                        <span class="indicator active" onclick="goToSlide('3rd', 0)"></span>
-                        <span class="indicator" onclick="goToSlide('3rd', 1)"></span>
-                        <span class="indicator" onclick="goToSlide('3rd', 2)"></span>
-                        <span class="indicator" onclick="goToSlide('3rd', 3)"></span>
-                    </div>
-                </div>
-                
-                <!-- Thumbnail Carousel -->
-                <div class="thumbnail-carousel">
-                    <div class="thumbnail-item active" onclick="goToSlide('3rd', 0)">
-                        <img src="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_1_ImageThumbnail.png" alt="Galia" loading="lazy" decoding="async">
-                    </div>
-                    <div class="thumbnail-item" onclick="goToSlide('3rd', 1)">
-                        <img src="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_2_ImageThumbnail.png" alt="Game Modes" loading="lazy" decoding="async">
-                    </div>
-                    <div class="thumbnail-item" onclick="goToSlide('3rd', 2)">
-                        <img src="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_3_ImageThumbnail.png" alt="Your Fleet, Your Way" loading="lazy" decoding="async">
-                    </div>
-                    <div class="thumbnail-item" onclick="goToSlide('3rd', 3)">
-                        <img src="src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_4_ImageThumbnail.png" alt="Life in Galia" loading="lazy" decoding="async">
-                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- RTS Content -->
-        <div id="rts" class="game-content">
-            <p style="text-align: center; color: rgba(255, 255, 255, 1); max-width: 800px; margin: 0 auto 3rem;">
-                Command vast fleets from a strategic overhead view. Manage resources, territories, and 
-                shape the political landscape of the galaxy.
-            </p>
-            
-            <!-- Video Carousel -->
-            <div class="video-carousel">
-                <div class="carousel-container">
+            <!-- RTS -->
+            <div id="rts" class="game-content">
+                <div class="video-carousel">
                     <div class="carousel-track" id="carousel-rts">
-                        <!-- Slide 1: Fleet Command -->
                         <div class="carousel-slide active">
-                            <video class="carousel-video" poster="src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png" autoplay muted>
-                                <source src="src/GAME section/Top-down RTS View/TDS_Slide_1_FleetCommand.mp4" type="video/mp4">
+                            <video class="carousel-video"
+                                poster="src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png"
+                                autoplay muted>
+                                <source src="src/GAME section/Top-down RTS View/TDS_Slide_1_FleetCommand.mp4"
+                                    type="video/mp4">
                             </video>
                             <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/fleet-command/">Fleet Command</a></h3>
-                                <p class="slide-description">With the press of a button, switch from a third-person experience to a top-down view where you can mass-manage your fleets, dominate Galia and outmaneuver opposing factions. Coming soon.</p>
-                                <a href="https://store.epicgames.com/en-US/p/star-atlas-bead34" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 2: Holosim -->
-                        <div class="carousel-slide">
-                            <video class="carousel-video" poster="src/GAME section/Top-down RTS View/Thumbnail Images/Slide_1_Holosim_Thumbnail.png" muted>
-                                <source src="src/GAME section/Top-down RTS View/Slide_2_Holosim.mp4" type="video/mp4">
-                            </video>
-                            <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/holosim/">Holosim</a></h3>
-                                <p class="slide-description">Holosim brings the heart of Fleet Command to your browser. It's a free-to-play in-universe simulation that lets you manage your fleets and experience strategic gameplay instantly, all without needing high-end hardware, ships, or a crypto wallet.</p>
-                                <a href="https://holosim.staratlas.com/" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 3: SAGE Labs -->
-                        <div class="carousel-slide">
-                            <video class="carousel-video" poster="src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png" muted>
-                                <source src="src/GAME section/Top-down RTS View/TDS_Slide_1_FleetCommand.mp4" type="video/mp4">
-                            </video>
-                            <div class="slide-caption">
-                                <h3 class="slide-title"><a class="slide-title-link" href="game/sage-labs/">SAGE Labs</a></h3>
-                                <p class="slide-description">SAGE Labs brings the Star Atlas economy to life right in your browser. Manage your fleet, mine resources, craft items, and scan for SDUs. You're not hunting for gold; you're supplying the shovels.</p>
-                                <a href="https://based.staratlas.com/" target="_blank" rel="noopener noreferrer" class="slide-link">Play Now</a>
+                                <h3 class="slide-title">Fleet Command</h3>
+                                <p class="slide-description">Mass-manage your fleets, dominate Galia and outmaneuver
+                                    opposing factions.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Carousel Navigation -->
                     <button class="carousel-btn carousel-prev" onclick="changeSlide('rts', -1)">‹</button>
                     <button class="carousel-btn carousel-next" onclick="changeSlide('rts', 1)">›</button>
-                    
-                    <!-- Carousel Indicators -->
-                    <div class="carousel-indicators">
-                        <span class="indicator active" onclick="goToSlide('rts', 0)"></span>
-                        <span class="indicator" onclick="goToSlide('rts', 1)"></span>
-                        <span class="indicator" onclick="goToSlide('rts', 2)"></span>
-                    </div>
-                </div>
-                
-                <!-- Thumbnail Carousel -->
-                <div class="thumbnail-carousel">
-                    <div class="thumbnail-item active" onclick="goToSlide('rts', 0)">
-                        <img src="src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png" alt="Fleet Command" loading="lazy" decoding="async">
-                    </div>
-                    <div class="thumbnail-item" onclick="goToSlide('rts', 1)">
-                        <img src="src/GAME section/Top-down RTS View/Thumbnail Images/Slide_1_Holosim_Thumbnail.png" alt="Holosim" loading="lazy" decoding="async">
-                    </div>
-                    <div class="thumbnail-item" onclick="goToSlide('rts', 2)">
-                        <img src="src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png" alt="SAGE Labs" loading="lazy" decoding="async">
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Economy Section -->
-    <section class="economy-section" id="economy">
-        <div class="section-header">
-            <div style="display: flex; align-items: stretch;">
-                <span class="section-number">0002.</span>
-                <h2 class="section-title">Economy</h2>
+        <!-- Economy -->
+        <section class="section" id="economy">
+            <div class="section-header text-center">
+                <span class="section-eyebrow">// 0002</span>
+                <h2 class="section-title">REAL ECONOMY</h2>
+                <p class="text-secondary" style="max-width: 600px; margin: 0 auto;">Join a real cash economy with real
+                    opportunities built directly on the blockchain.</p>
             </div>
-            <div class="section-icon-wrapper">
-                <img src="Icon.svg" alt="" class="section-icon" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                <span class="section-tooltip">TO THE MOON</span>
-            </div>
-        </div>
-        <p class="section-subtitle">Join a real cash economy with real opportunities.</p>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <pixel-canvas data-gap="6" data-speed="20" data-colors="#32feff,#ffffff" data-variant="icon" data-opacity="0.85"></pixel-canvas>
-                <div class="stat-content">
+
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
                     <div class="stat-value">$68.3M</div>
                     <div class="stat-label">Total Volume Traded</div>
                 </div>
-            </div>
-            
-            <div class="stat-card">
-                <pixel-canvas data-gap="6" data-speed="20" data-colors="#32feff,#ffffff" data-variant="icon" data-opacity="0.85"></pixel-canvas>
-                <div class="stat-content">
+                <div class="stat-card glass-card">
                     <div class="stat-value">$21.1M</div>
                     <div class="stat-label">Annual GDP</div>
                 </div>
-            </div>
-            
-            <div class="stat-card">
-                <pixel-canvas data-gap="6" data-speed="20" data-colors="#32feff,#ffffff" data-variant="icon" data-opacity="0.85"></pixel-canvas>
-                <div class="stat-content">
+                <div class="stat-card glass-card">
                     <div class="stat-value">9.69M</div>
-                    <div class="stat-label">Average ATLAS Earned Daily</div>
+                    <div class="stat-label">ATLAS Earned Daily</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="economy-cta">
-            <a href="https://staratlas.com/newsroom/economic-reports" target="_blank" rel="noopener noreferrer" class="secondary-btn">Latest Economic Report</a>
-            <a href="https://play.staratlas.com/market/" target="_blank" rel="noopener noreferrer" class="secondary-btn">Explore Galactic Marketplace</a>
-        </div>
-    </section>
 
-    <!-- Community Section -->
-    <section class="community-section" id="community">
-        <div class="section-header">
-            <div style="display: flex; align-items: stretch;">
-                <span class="section-number">0003.</span>
-                <h2 class="section-title">Community</h2>
+            <div class="d-flex justify-center gap-md mt-lg" style="margin-top: 3rem;">
+                <a href="https://staratlas.com/newsroom/economic-reports" target="_blank"
+                    class="btn btn-secondary">Economic Report</a>
+                <a href="https://play.staratlas.com/market/" target="_blank" class="btn btn-primary">Galactic
+                    Marketplace</a>
             </div>
-            <div class="section-icon-wrapper">
-                <img src="Icon.svg" alt="" class="section-icon" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-                <span class="section-tooltip">TO THE TOP</span>
-            </div>
-        </div>
-        
-        <div class="community-hero">
-            <div class="community-content-wrapper">
-                
-                <div class="community-visual-content">
-                    <div class="community-characters">
-                        <img src="src/community/left-char.png" alt="Star Atlas character" class="community-char char-left" loading="lazy" decoding="async">
-                        <img src="src/community/mid-char.png" alt="Star Atlas character" class="community-char char-mid" loading="lazy" decoding="async">
-                        <img src="src/community/right-char.png" alt="Star Atlas character" class="community-char char-right" loading="lazy" decoding="async">
-                    </div>
-                    
-                    <a href="https://discord.gg/staratlas" target="_blank" rel="noopener noreferrer" class="discord-card-link">
-                        <div class="discord-card">
-                            <div class="discord-card-content">
-                                <div class="discord-card-image">
-                                    <img src="src/community/discord-bg.jpg" alt="Star Atlas Discord" loading="lazy" decoding="async">
-                                    <!-- <pixel-canvas data-gap="20" data-speed="15" data-colors="#5affff" data-variant="icon" data-opacity="1" data-blend="additive" data-size="2"></pixel-canvas> -->
-                                    <div class="card-logos">
-                                        <img src="Icon.svg" alt="Star Atlas" class="star-atlas-logo">
-                                        <svg class="discord-logo" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="slide-caption discord-card-text">
-                                    <h4 class="slide-title">STAR ATLAS DISCORD</h4>
-                                    <p class="slide-description">Join a community of pioneers, ready to answer all of your questions.</p>
-                                    <span class="discord-cta">discord.gg/staratlas</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+
+    </div> <!-- End Gated -->
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="Logo.svg" alt="Star Atlas" width="120">
+                    <p>Star Atlas is a next-gen gaming metaverse emerging from the confluence of state-of-the-art
+                        blockchain, real-time graphics, and multiplayer video game technologies.</p>
+                </div>
                 <div class="footer-column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://x.com/staratlas" target="_blank" rel="noopener noreferrer">X</a></li>
-                        <li><a href="https://discord.gg/StarAtlas" target="_blank" rel="noopener noreferrer">Discord</a></li>
-                        <li><a href="https://www.youtube.com/channel/UCt-y8Npwje5KDG5MSZ0a9Jw" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-                        <li><a href="https://www.reddit.com/r/StarAtlas/" target="_blank" rel="noopener noreferrer">Reddit</a></li>
+                    <h4 class="footer-heading">Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">X / Twitter</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">YouTube</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="https://support.staratlas.com/" target="_blank" rel="noopener noreferrer">Help Center</a></li>
-                        <li><a href="https://experience.staratlas.com/contact" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+                    <h4 class="footer-heading">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="https://staratlas.com/careers" target="_blank" rel="noopener noreferrer">Careers</a></li>
-                        <li><a href="https://staratlas.com/newsroom/press-kit" target="_blank" rel="noopener noreferrer">Press</a></li>
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p class="footer-text">© 2625 Star Atlas. All rights reserved. | <a href="https://staratlas.com/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a> | <a href="https://staratlas.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+                <p>© 2625 Star Atlas. All rights reserved.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
             </div>
         </div>
     </footer>
-    
-    </div> <!-- End of Gated Content -->
 
-    <!-- Scan Line Effect -->
-    <div class="scan-line"></div>
-
-    <!-- Sticky Footer Bar -->
-    <div class="sticky-footer-bar" id="stickyFooterBar">
-        <div class="footer-bar-container">
-            <div class="footer-bar-icon-box">
-                <img src="Icon.svg" alt="Star Atlas" class="footer-bar-icon">
-            </div>
-            <div class="footer-bar-title">EARLY ACCESS</div>
-            <div class="footer-bar-center">
-                <form class="footer-email-form" onsubmit="submitFooterEmail(event)">
-                    <div class="footer-email-wrapper">
-                        <input type="email" class="footer-email-input" placeholder="Add email for early access" required>
-                        <div class="footer-email-display">
-                            <span class="footer-email-local"></span><span class="footer-email-domain"></span>
-                        </div>
-                    </div>
-                    <button type="submit" class="footer-submit-btn" disabled>GET ACCESS NOW</button>
-                </form>
-                <!-- reCAPTCHA v2 checkbox container (hidden initially) -->
-                <div id="footer-recaptcha" style="display: none; margin: 15px 0;"></div>
-                <div id="footerMessage" class="footer-message" style="margin-top: 0.5rem; color: #f87171; font-size: 0.875rem; display: none;"></div>
-            </div>
-            <div class="footer-timestamp">
-                <span class="footer-log-prefix">STAR.ATLAS LOG</span>
-                <span class="footer-timestamp-date" id="footer-timestamp-date">00/00/0000</span>
-                <span class="footer-timestamp-time" id="footer-timestamp-time">00:00:00</span>
-            </div>
-            <button class="footer-bar-close" onclick="closeFooterBar()">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- Google reCAPTCHA v2 (checkbox) -->
+    <!-- Scripts -->
     <script>
-        // Replace with your actual site key after deployment
         var RECAPTCHA_SITE_KEY = '6LdVZr8rAAAAAJbWKO1nEyTcFVDLIXgAsMWHp0Ll';
-
-        // reCAPTCHA v2 state (global so main.js can access)
         var heroRecaptchaWidgetId = null;
-        var footerRecaptchaWidgetId = null;
         var heroRecaptchaResponse = '';
-        var footerRecaptchaResponse = '';
 
-        // Initialize reCAPTCHA v2 widgets when ready (called by grecaptcha onload)
         function onloadCallback() {
-            console.log('reCAPTCHA: onloadCallback fired');
-            console.log('reCAPTCHA: origin =', window.location.origin);
-            console.log('reCAPTCHA: hostname =', window.location.hostname);
-
-            // Initialize hero form reCAPTCHA (renders even while hidden)
             var heroContainer = document.getElementById('hero-recaptcha');
             if (heroContainer && window.grecaptcha) {
-                try {
-                    heroRecaptchaWidgetId = grecaptcha.render('hero-recaptcha', {
-                        'sitekey': RECAPTCHA_SITE_KEY,
-                        'callback': function(response) {
-                            heroRecaptchaResponse = response;
-                            console.log('Hero reCAPTCHA verified');
-                            var btn = document.querySelector('.hero-submit-btn');
-                            if (btn) btn.disabled = false;
-                        },
-                        'expired-callback': function() {
-                            heroRecaptchaResponse = '';
-                            console.log('Hero reCAPTCHA expired');
-                            var btn = document.querySelector('.hero-submit-btn');
-                            if (btn) btn.disabled = true;
-                        }
-                    });
-                    console.log('Hero reCAPTCHA rendered successfully, widgetId:', heroRecaptchaWidgetId);
-                } catch (err) {
-                    console.error('Hero reCAPTCHA render failed:', err);
-                }
-            }
-
-            // Initialize footer form reCAPTCHA (renders even while hidden)
-            var footerContainer = document.getElementById('footer-recaptcha');
-            if (footerContainer && window.grecaptcha) {
-                try {
-                    footerRecaptchaWidgetId = grecaptcha.render('footer-recaptcha', {
-                        'sitekey': RECAPTCHA_SITE_KEY,
-                        'callback': function(response) {
-                            footerRecaptchaResponse = response;
-                            console.log('Footer reCAPTCHA verified');
-                            var btn = document.querySelector('.footer-submit-btn');
-                            if (btn) btn.disabled = false;
-                        },
-                        'expired-callback': function() {
-                            footerRecaptchaResponse = '';
-                            console.log('Footer reCAPTCHA expired');
-                            var btn = document.querySelector('.footer-submit-btn');
-                            if (btn) btn.disabled = true;
-                        }
-                    });
-                    console.log('Footer reCAPTCHA rendered successfully, widgetId:', footerRecaptchaWidgetId);
-                } catch (err) {
-                    console.error('Footer reCAPTCHA render failed:', err);
-                }
+                heroRecaptchaWidgetId = grecaptcha.render('hero-recaptcha', {
+                    'sitekey': RECAPTCHA_SITE_KEY,
+                    'callback': function (response) {
+                        heroRecaptchaResponse = response;
+                        document.querySelector('.hero-submit-btn').disabled = false;
+                    },
+                    'expired-callback': function () {
+                        heroRecaptchaResponse = '';
+                        document.querySelector('.hero-submit-btn').disabled = true;
+                    }
+                });
             }
         }
+
+        // Custom mouse glow tracking
+        document.addEventListener('mousemove', function (e) {
+            const glow = document.querySelector('.bg-glow');
+            if (glow) {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            }
+        });
+
+        // Intersection Observer for Scroll Reveals
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.section, .glass-card, .game-content').forEach(el => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
+        });
     </script>
-    <!-- reCAPTCHA v2 script -->
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     <script src="src/main.js" defer></script>
 
-    <!-- Legacy inline script preserved (disabled) for reference. All active logic lives in src/main.js -->
-    <script type="text/plain" data-legacy-inline-script>
-    /* Legacy inline script removed. See src/main.js */
-</script>
-
-    <!-- Early Access Modal -->
-    <div id="earlyAccessModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEarlyAccessModal()">&times;</span>
-            
-            <div id="formContainer">
-                <h2>Get Early Access</h2>
-                <p>Enter your email to receive your early access key</p>
-                
-                <form onsubmit="submitEarlyAccess(event)" class="modal-form">
-                    <input 
-                        type="email" 
-                        id="earlyAccessEmail" 
-                        placeholder="Enter your email" 
-                        required
-                        class="modal-input"
-                    />
-                    
-                    <p class="disclaimer">
-                        By entering your email, you'll get your early-access key and occasional updates from Star Atlas. You can unsubscribe anytime.
-                    </p>
-                    
-                    <button type="submit" id="submitEarlyAccess" class="modal-submit">Get Access Now</button>
-                </form>
-                
-                <div id="errorMessage" class="error-message" style="display: none;"></div>
-            </div>
-            
-            <div id="successMessage" class="success-container" style="display: none;">
-                <h2>Success!</h2>
-                <p>Your early access key:</p>
-                <div class="key-display">
-                    <span id="accessKey"></span>
-                    <button onclick="copyAccessKey()" class="copy-btn">Copy</button>
-                </div>
-                <p class="success-note">Check your email for instructions on how to use your key.</p>
-            </div>
-        </div>
-    </div>
 </body>
-</html> 
+
+</html>
