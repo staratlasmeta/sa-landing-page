@@ -1,0 +1,61 @@
+{
+  "path": "game/holosim/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "Holosim",
+  "description": "Holosim is the most accessible way to sample Star Atlas quickly, making it a key conversion tool for first-time visitors.",
+  "eyebrow": "Browser entry",
+  "heroTitle": "Holosim makes Star Atlas feel reachable from the first click.",
+  "heroSummary": "A premium funnel still needs a low-friction on-ramp. Holosim gives new visitors a fast way to understand the ecosystem without losing the sense that they are entering a larger universe.",
+  "utilityLine": "This page is intentionally direct because its purpose is conversion clarity, not lore density.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 2 Holosim.mp4",
+    "poster": "src/GAME section/Top-down RTS View/Thumbnail Images/Slide_1_Holosim_Thumbnail.png",
+    "label": "Browser preview",
+    "caption": "The lowest-friction path is now treated as a premium entry point, not a side note.",
+    "alt": "Star Atlas Holosim preview"
+  },
+  "heroStats": [
+    { "value": "Fast", "label": "Time to first interaction" },
+    { "value": "Browser", "label": "No heavy setup" },
+    { "value": "Connected", "label": "Shared ecosystem" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Conversion role",
+    "title": "This is the first-touch experience the site now prioritizes.",
+    "body": "Instead of forcing signups or front-loading friction, the redesign lets the visitor begin with a browser-native product surface that still feels part of the larger world.",
+    "bullets": ["Reduced friction", "Clear next step", "Better handoff into deeper systems"]
+  },
+  "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+  "secondaryAction": { "label": "Explore SAGE Labs", "href": "/game/sage-labs/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Why it matters",
+      "heading": "Holosim is more than a lightweight demo.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Access", "title": "It lowers the barrier to entry", "body": "The visitor can engage immediately instead of being blocked by setup, email gates, or ambiguity." },
+        { "eyebrow": "Orientation", "title": "It teaches the ecosystem quickly", "body": "Browser-native interactions make the broader product easier to understand before the user commits more time." },
+        { "eyebrow": "Momentum", "title": "It creates a better first conversion event", "body": "Premium marketing is strongest when it gets the user into a meaningful product moment fast." }
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "The shortest path to clarity.",
+      "items": [
+        { "question": "Why prioritize Holosim over a signup form?", "answer": "Because product interaction builds trust faster than an email ask. The redesign moves the first conversion event closer to actual engagement." },
+        { "question": "Does this replace the bigger game fantasy?", "answer": "No. It makes that bigger fantasy easier to reach by giving visitors a confident first step." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Start where the friction is lowest.",
+    "text": "Launch the browser experience now, then expand into economy and ownership systems when you want more depth.",
+    "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+    "secondaryAction": { "label": "Explore the economy", "href": "/economy/", "variant": "secondary" }
+  }
+}

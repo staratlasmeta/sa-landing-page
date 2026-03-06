@@ -1,0 +1,75 @@
+{
+  "path": "game/game-modes/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "Game Modes",
+  "description": "See how Star Atlas organizes combat, traversal, open-world play, and competitive depth into a clearer gameplay portfolio.",
+  "eyebrow": "Feature page",
+  "heroTitle": "Variety only feels premium when it still reads as one product.",
+  "heroSummary": "This page reframes the gameplay portfolio so visitors understand the range without feeling like they are looking at unrelated prototypes or disconnected modes.",
+  "utilityLine": "The goal here is synthesis: explain multiple experiences while preserving one cohesive product story.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 2 Gamemodes.mp4",
+    "poster": "src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_2_ImageThumbnail.png",
+    "label": "Gameplay preview",
+    "caption": "A tighter explanation of range, structure, and player choice.",
+    "alt": "Star Atlas game modes preview"
+  },
+  "heroStats": [
+    { "value": "PvP", "label": "Competitive pressure" },
+    { "value": "PvE", "label": "Cooperative and solo loops" },
+    { "value": "Open world", "label": "Persistent backdrop" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Experience design",
+    "title": "Each mode now has a job in the story.",
+    "body": "Instead of listing features, the redesign explains why each mode exists and what kind of player energy it serves.",
+    "bullets": ["Structured competition", "Skill expression", "Persistent exploration"]
+  },
+  "primaryAction": { "label": "View the game overview", "href": "/game/" },
+  "secondaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "variant": "secondary", "external": true },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Mode families",
+      "heading": "A clearer map of the gameplay spectrum.",
+      "columns": 4,
+      "cards": [
+        { "eyebrow": "Competitive", "title": "Arena combat", "body": "Fast, legible conflict built for skill expression and direct comparison." },
+        { "eyebrow": "Traversal", "title": "Racing and movement", "body": "Ship handling becomes a spectacle and a mastery loop, not just transit." },
+        { "eyebrow": "Cooperative", "title": "PvE encounters", "body": "Structured missions and escalating opposition add purpose beyond pure rivalry." },
+        { "eyebrow": "Persistent", "title": "Open-world operations", "body": "The larger frontier remains the canvas where consequence accumulates." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Positioning",
+      "heading": "The site no longer makes the visitor stitch the experience together alone.",
+      "body": [
+        "A premium marketing page should curate meaning. This redesign explains the relationship between high-intensity modes and the larger world so the visitor understands the product as a system.",
+        "That shift reduces the feeling of fragmentation and gives each page a clearer next step."
+      ],
+      "asideEyebrow": "Readability",
+      "asideTitle": "Mode pages should answer one question.",
+      "asideBody": "What kind of experience does this deliver, and who is it for?",
+      "asidePoints": ["Competitive pilots", "Explorers", "Operators", "Faction players"]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "The essentials, without overexplaining.",
+      "items": [
+        { "question": "Why not list every future mode or edge case?", "answer": "Because trust improves when the page explains what matters now and how the product is structured, not when it overwhelms the reader with speculative detail." },
+        { "question": "How does this connect back to the economy and universe?", "answer": "Modes are now framed as expressions of the same world, with progression, ownership, and faction context surrounding them." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Follow the mode that matches your play style.",
+    "text": "Move into ship ownership, fleet command, or the wider universe depending on how you want to engage.",
+    "primaryAction": { "label": "See Your Fleet", "href": "/game/your-fleet-your-way/" },
+    "secondaryAction": { "label": "See Fleet Command", "href": "/game/fleet-command/", "variant": "secondary" }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "path": "company/",
+  "template": "company",
+  "navKey": "updates",
+  "title": "Company",
+  "description": "A company page for Star Atlas that reinforces brand quality, operating principles, and trust without relying on generic startup tropes.",
+  "eyebrow": "Company",
+  "heroTitle": "The company page should strengthen trust, not distract from the product.",
+  "heroSummary": "This page frames Star Atlas and ATMTA around principles, operating posture, and quality standards instead of generic company filler. It exists to support credibility and cohesion across the marketing system.",
+  "utilityLine": "If specific leadership or team details need to be added later, they should be current and intentionally maintained. The template works well without placeholder bios.",
+  "heroMedia": {
+    "type": "image",
+    "src": "src/Community_Website_july22.png",
+    "label": "Company signal",
+    "caption": "Premium brand trust comes from coherence, restraint, and a visible standard of care.",
+    "alt": "Star Atlas company brand visual"
+  },
+  "heroStats": [
+    { "value": "Cinematic", "label": "Brand standard" },
+    { "value": "High-trust", "label": "Messaging principle" },
+    { "value": "Systemic", "label": "Product thinking" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Page role",
+    "title": "This page explains how the product is being stewarded.",
+    "body": "It reassures visitors that the brand, roadmap, support, and product shell are being treated as one connected experience rather than isolated surfaces.",
+    "bullets": ["Editorial product thinking", "Consistent visual standards", "Clearer relationship between company and community"]
+  },
+  "primaryAction": { "label": "View the roadmap", "href": "/roadmap/" },
+  "secondaryAction": { "label": "Contact support", "href": "/contact/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Operating principles",
+      "heading": "The standards this redesign assumes the company wants to project.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Clarity", "title": "Explain the universe without overwhelming it", "body": "Every page should help visitors understand what matters and what to do next." },
+        { "eyebrow": "Restraint", "title": "Make fewer, stronger moments", "body": "Premium design relies on hierarchy, whitespace, and confidence rather than constant noise." },
+        { "eyebrow": "Trust", "title": "Keep status and freshness signals honest", "body": "Roadmaps, newsroom content, and UI states should never undermine confidence through neglect." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Why it matters",
+      "heading": "A cohesive company page helps the rest of the marketing system feel deliberate.",
+      "body": [
+        "Without a coherent company layer, even strong product pages can feel fragmented. This template ties the brand voice, support posture, and roadmap discipline together in one place.",
+        "That makes the overall experience feel closer to a premium product ecosystem and less like separate destinations stitched together."
+      ],
+      "asideEyebrow": "Guiding idea",
+      "asideTitle": "The company story should support the product story.",
+      "asideBody": "Not the other way around.",
+      "asidePoints": ["Brand cohesion", "Product stewardship", "Support alignment", "Community trust"]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Follow the company story back into product and support.",
+    "text": "Move into the roadmap, contact channels, or the homepage experience depending on what you need next.",
+    "primaryAction": { "label": "Contact support", "href": "/contact/" },
+    "secondaryAction": { "label": "View homepage", "href": "/", "variant": "secondary" }
+  }
+}

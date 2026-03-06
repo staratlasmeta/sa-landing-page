@@ -1,75 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | Star Atlas</title>
-  <meta name="description" content="The page you're looking for doesn't exist. Return to the Star Atlas homepage." />
-  <meta name="robots" content="noindex,follow" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="canonical" href="https://staratlas.com/" />
-  <link rel="icon" type="image/png" href="Icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Star Atlas</title>
+    <meta name="description" content="Return to the Star Atlas homepage, game overview, or support hub.">
+    <meta name="robots" content="noindex,follow">
+    <meta name="theme-color" content="#04060c">
+    <link rel="icon" type="image/png" href="Icon.png">
+    <link rel="apple-touch-icon" href="Icon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="loading-bar" id="loadingBar"></div>
-  <div class="grid-container">
-    <div class="grid-layer dots"></div>
-    <div class="grid-layer grid"></div>
-    <div class="grid-layer accent"></div>
-  </div>
-  <div class="mouse-spotlight"></div>
-  <div class="glow-container">
-    <div class="glow"></div>
-    <div class="glow"></div>
-    <div class="glow"></div>
-  </div>
-
-  <nav>
-    <div class="nav-main">
-      <div class="nav-container">
-        <div class="logo">
-          <a href="/" aria-label="Star Atlas Home">
-            <img src="Logo.svg" alt="Star Atlas">
-          </a>
-        </div>
-        <ul class="nav-links">
-          <li><a href="/game/">Game</a></li>
-          <li><a href="/#economy">Economy</a></li>
-          <li><a href="/#community">Community</a></li>
-        </ul>
-        <div class="nav-cta">
-          <a href="https://play.staratlas.com/market/" target="_blank" class="download-btn" rel="noopener noreferrer"><span>Galactic Marketplace</span></a>
-        </div>
-      </div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-background" aria-hidden="true">
+        <div class="site-grid"></div>
+        <div class="site-noise"></div>
+        <div class="site-glow site-glow--one"></div>
+        <div class="site-glow site-glow--two"></div>
+        <div class="site-glow site-glow--three"></div>
     </div>
-  </nav>
 
-  <main>
-    <section class="game-section seo-page" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-      <div class="section-header" style="opacity:1; animation:none; position: static; margin: 0 0 2rem 0;">
-        <div style="display:flex; align-items:stretch;">
-          <span class="section-number">404.</span>
-          <h1 class="section-title">Page Not Found</h1>
+    <header class="site-header" data-header>
+        <div class="container nav-shell">
+            <a class="brand" href="index.html" aria-label="Star Atlas home">
+                <img src="Logo.svg" alt="Star Atlas">
+            </a>
         </div>
-      </div>
-      <p class="section-subtitle" style="margin-bottom: 2rem;">The coordinates you entered don't match any known location in Galia.</p>
-      <a href="/" class="secondary-btn" style="margin: 0;">Return to Home</a>
-    </section>
-  </main>
+    </header>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-bottom">
-        <p class="footer-text">© 2625 Star Atlas. All rights reserved. | <a href="/">Home</a></p>
-      </div>
-    </div>
-  </footer>
+    <main id="main-content" class="not-found">
+        <div class="container">
+            <div class="surface-card card-content" data-reveal>
+                <p class="eyebrow">404</p>
+                <h1 class="display-title page-display">This route drifted off the star map.</h1>
+                <p class="hero-lede">Return to the homepage, explore the game overview, or head to support if you were looking for a specific destination.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="index.html"><span>Go to Homepage</span></a>
+                    <a class="button button-secondary" href="game/"><span>Explore the Game</span></a>
+                    <a class="button button-secondary" href="contact/"><span>Get Support</span></a>
+                </div>
+            </div>
+        </div>
+    </main>
 
-  <script src="src/main.js" defer></script>
+    <script src="src/main.js" defer></script>
 </body>
 </html>
-

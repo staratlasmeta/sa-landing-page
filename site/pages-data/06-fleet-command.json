@@ -1,0 +1,74 @@
+{
+  "path": "game/fleet-command/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "Fleet Command",
+  "description": "See how Star Atlas expands from personal-scale immersion into a larger strategic command layer with territory, logistics, and faction operations.",
+  "eyebrow": "Feature page",
+  "heroTitle": "From pilot fantasy to admiral thinking.",
+  "heroSummary": "Fleet Command matters because it changes the scale of your decisions. The redesign treats it as a strategic layer with a clear role in the broader universe, not just a side mode.",
+  "utilityLine": "This page clarifies where command-scale play sits inside the Star Atlas product stack.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Tds Slide 1 Fleetcommand.mp4",
+    "poster": "src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png",
+    "label": "Command preview",
+    "caption": "Scale is only compelling when the player understands what changes at that scale.",
+    "alt": "Star Atlas fleet command preview"
+  },
+  "heroStats": [
+    { "value": "RTS", "label": "Strategic view" },
+    { "value": "Territory", "label": "Operational pressure" },
+    { "value": "Coordination", "label": "Faction-level play" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Product role",
+    "title": "Fleet Command turns scale into a different kind of mastery.",
+    "body": "The page now makes it clear that command play is about coordination, resource leverage, and territorial decision-making rather than simply zooming the camera out.",
+    "bullets": ["Higher-order decision making", "Operational visibility", "Faction and alliance consequences"]
+  },
+  "primaryAction": { "label": "View the roadmap", "href": "/roadmap/" },
+  "secondaryAction": { "label": "Explore the economy", "href": "/economy/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Command pillars",
+      "heading": "What changes when the player steps into the operational layer.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Visibility", "title": "See the board", "body": "Strategic overview reveals supply, movement, territory, and threat in ways cockpit play cannot." },
+        { "eyebrow": "Coordination", "title": "Move more than one asset", "body": "Fleet-level play creates a richer sense of responsibility, planning, and timing." },
+        { "eyebrow": "Pressure", "title": "Hold valuable space", "body": "Territory only matters when it is defended, contested, and logistically supported." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Why it sells the universe",
+      "heading": "Strategic scale is one of the reasons Star Atlas feels bigger than a typical sci-fi game pitch.",
+      "body": [
+        "This page now makes the argument directly: Fleet Command is where the universe starts to feel like a living power map instead of a series of isolated moments.",
+        "The design keeps the message lean so the ambition feels believable instead of overpromised."
+      ],
+      "asideEyebrow": "Trust",
+      "asideTitle": "Clarity matters more than inflated status language.",
+      "asideBody": "The page avoids speculative countdowns and cluttered utility states, focusing on the strategic promise in clear terms.",
+      "asidePoints": ["No hype haze", "Clear system role", "Direct next steps", "Better continuity"]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "How this page reduces uncertainty.",
+      "items": [
+        { "question": "Why is Fleet Command important to the marketing story?", "answer": "Because it signals scale and depth. It tells the visitor that Star Atlas is not only about a single avatar perspective." },
+        { "question": "What is the right next step from here?", "answer": "See the roadmap for product status clarity or move into the economy page to understand what command decisions are ultimately protecting and amplifying." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Follow command scale into economy and roadmap context.",
+    "text": "See the systems that make command meaningful, then track how the product is framed going forward.",
+    "primaryAction": { "label": "Explore the economy", "href": "/economy/" },
+    "secondaryAction": { "label": "View the roadmap", "href": "/roadmap/", "variant": "secondary" }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "path": "game/sage-labs/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "SAGE Labs",
+  "description": "SAGE Labs gives Star Atlas a browser-native economy and industrial loop that makes ownership and logistics feel real.",
+  "eyebrow": "Browser economy",
+  "heroTitle": "SAGE Labs is where the economy becomes tangible.",
+  "heroSummary": "This page frames SAGE Labs as the industrial and logistical backbone of the browser ecosystem, helping visitors understand how market activity connects to production and movement.",
+  "utilityLine": "The redesign keeps the explanation practical and calm so the system feels trustworthy instead of opaque.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/GAME section/Top-down RTS View/Slide_2_Holosim.mp4",
+    "poster": "src/GAME section/Top-down RTS View/Thumbnail Images/Slide_1_Holosim_Thumbnail.png",
+    "label": "Economy preview",
+    "caption": "Industrial systems are now framed as part of a coherent product story.",
+    "alt": "Star Atlas browser economy preview"
+  },
+  "heroStats": [
+    { "value": "Production", "label": "Industrial play" },
+    { "value": "Movement", "label": "Operational depth" },
+    { "value": "Ownership", "label": "Persistent stakes" }
+  ],
+  "heroPanel": {
+    "eyebrow": "System role",
+    "title": "This is where the economy stops being abstract.",
+    "body": "SAGE Labs turns assets and market intent into active systems. That makes the broader Star Atlas pitch feel more concrete and more premium.",
+    "bullets": ["Production loops", "Scanning and logistics", "A stronger reason to care about assets"]
+  },
+  "primaryAction": { "label": "Explore the economy", "href": "/economy/" },
+  "secondaryAction": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "variant": "secondary", "external": true },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Core loops",
+      "heading": "How SAGE Labs strengthens the ecosystem story.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Industry", "title": "Production has a visible role", "body": "The browser economy is easier to trust when it clearly connects to manufacturing and supply." },
+        { "eyebrow": "Movement", "title": "Logistics creates consequence", "body": "Transport, scanning, and deployment make the system feel operational rather than theoretical." },
+        { "eyebrow": "Ownership", "title": "Assets become active tools", "body": "Value feels more meaningful when assets participate in loops instead of sitting as static inventory." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Why this page exists",
+      "heading": "A premium economy page should create confidence, not friction.",
+      "body": [
+        "The old site mixed too much utility and jargon too early. This version reframes SAGE Labs with a clearer narrative: what it does, why it matters, and where it fits in the broader system.",
+        "That makes the economy more approachable without flattening its depth."
+      ],
+      "asideEyebrow": "Outcome",
+      "asideTitle": "Visitors understand why the economy matters faster.",
+      "asideBody": "The page uses less operational clutter and more deliberate explanation.",
+      "asidePoints": ["Reduced jargon", "Clear role", "Better continuity", "Stronger trust"]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Move from browser systems into the full economy picture.",
+    "text": "See the marketplace, read the economy page, or return to the game overview with a stronger mental model.",
+    "primaryAction": { "label": "Explore the economy", "href": "/economy/" },
+    "secondaryAction": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "variant": "secondary", "external": true }
+  }
+}

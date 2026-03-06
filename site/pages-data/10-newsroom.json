@@ -1,0 +1,75 @@
+{
+  "path": "newsroom/",
+  "template": "newsroom",
+  "navKey": "updates",
+  "title": "Newsroom",
+  "description": "A premium newsroom hub for Star Atlas that organizes updates, editorial channels, and community signals without feeling stale or overloaded.",
+  "eyebrow": "Updates",
+  "heroTitle": "Updates should feel curated, current, and easy to trust.",
+  "heroSummary": "This newsroom template avoids the feeling of a cluttered archive by grouping content by purpose: release notes, economy signals, worldbuilding, and company context.",
+  "utilityLine": "The page is designed so only genuinely current items should be featured prominently. Evergreen categories stay visible; stale stories should fall back quietly.",
+  "heroMedia": {
+    "type": "image",
+    "src": "src/community/comm-bg.jpg",
+    "label": "Editorial hub",
+    "caption": "A newsroom should guide attention instead of making every update compete equally.",
+    "alt": "Star Atlas newsroom atmosphere"
+  },
+  "heroStats": [
+    { "value": "Release notes", "label": "Product changes" },
+    { "value": "Economic reports", "label": "Market context" },
+    { "value": "Dispatches", "label": "Universe and team signals" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Editorial discipline",
+    "title": "Freshness is a trust issue, not just a content issue.",
+    "body": "The redesign gives this page a structure that can promote what is current while quietly de-emphasizing stale material that weakens confidence.",
+    "bullets": ["Featured area reserved for current content only", "Evergreen categories separated from time-sensitive updates", "Clear exits into roadmap, support, and community channels"]
+  },
+  "primaryAction": { "label": "View the roadmap", "href": "/roadmap/" },
+  "secondaryAction": { "label": "Join Discord", "href": "https://discord.gg/staratlas", "variant": "secondary", "external": true },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Editorial streams",
+      "heading": "Organize the newsroom by user intent.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Product", "title": "Release notes and launch updates", "body": "Use this stream for what changed, what opened, and what visitors should try next.", "action": { "label": "Open roadmap", "href": "/roadmap/" } },
+        { "eyebrow": "Economy", "title": "Economic reports and market context", "body": "Keep the signals high-value and recent so the page supports trust instead of noise.", "action": { "label": "See economy page", "href": "/economy/" } },
+        { "eyebrow": "Universe", "title": "Dispatches and worldbuilding", "body": "Editorial storytelling should deepen the premium feel without blocking action.", "action": { "label": "See the universe", "href": "/game/life-in-galia/" } }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Content policy",
+      "heading": "What belongs in the featured area and what should quietly archive.",
+      "body": [
+        "Only current, decision-relevant updates should get hero placement. Old campaigns, outdated launch states, and stale status claims should lose visual prominence quickly.",
+        "That keeps the newsroom from undermining the premium experience the rest of the site works to build."
+      ],
+      "asideEyebrow": "Recommended rhythm",
+      "asideTitle": "Use the newsroom as a confidence surface.",
+      "asideBody": "Every featured card should answer why the visitor should care right now.",
+      "asidePoints": ["Current product status", "Notable releases", "Major economy signals", "Community moments"]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Related destinations",
+      "heading": "Keep the update ecosystem connected.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Roadmap", "title": "Roadmap page", "body": "A clearer status page for what is playable now, what is expanding next, and what remains long-term.", "action": { "label": "View roadmap", "href": "/roadmap/" } },
+        { "eyebrow": "Support", "title": "Contact and help", "body": "Visitors should always know where to go when they need answers or issue resolution.", "action": { "label": "Get support", "href": "/contact/" } },
+        { "eyebrow": "Community", "title": "Discord", "body": "Community conversation remains important, but the site now labels this clearly as a separate destination.", "action": { "label": "Join Discord", "href": "https://discord.gg/staratlas", "external": true } }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Keep the update flow clear and current.",
+    "text": "From here, move into the roadmap for status clarity or into support and community channels for direct engagement.",
+    "primaryAction": { "label": "View roadmap", "href": "/roadmap/" },
+    "secondaryAction": { "label": "Get support", "href": "/contact/", "variant": "secondary" }
+  }
+}

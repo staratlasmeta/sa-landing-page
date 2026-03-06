@@ -1,0 +1,74 @@
+{
+  "path": "game/life-in-galia/",
+  "template": "universe",
+  "navKey": "universe",
+  "title": "Life in Galia",
+  "description": "Meet the factions, political tensions, and species identity that give Star Atlas its universe-level character.",
+  "eyebrow": "Universe",
+  "heroTitle": "A premium sci-fi universe needs factions with real texture.",
+  "heroSummary": "This page distills the political and cultural shape of Galia into a smaller number of stronger ideas so the universe feels memorable instead of encyclopedic.",
+  "utilityLine": "The redesign uses progressive disclosure here: enough worldbuilding to build trust, without forcing lore homework.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 4 Lifeingalia.mp4",
+    "poster": "src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_4_ImageThumbnail.png",
+    "label": "Faction preview",
+    "caption": "Faction identity is now presented as a product advantage, not just a lore archive.",
+    "alt": "Star Atlas faction preview"
+  },
+  "heroStats": [
+    { "value": "MUD", "label": "Industrial momentum" },
+    { "value": "ONI", "label": "Coalition power" },
+    { "value": "Ustur", "label": "Calculated ambition" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Universe role",
+    "title": "Faction texture makes every other page feel more alive.",
+    "body": "Game loops, economy decisions, and community identity all become more compelling when the universe gives them meaningful contrast.",
+    "bullets": ["Distinct power centers", "Clear visual and cultural contrast", "A stronger reason to pick a side"]
+  },
+  "primaryAction": { "label": "Explore Galia", "href": "/game/galia/" },
+  "secondaryAction": { "label": "Join the community", "href": "https://discord.gg/staratlas", "variant": "secondary", "external": true },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Faction identity",
+      "heading": "Three power centers. Three different futures.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "MUD", "title": "Industrial confidence", "body": "MUD channels human expansion through production capacity, pragmatic ambition, and a recognizably physical presence." },
+        { "eyebrow": "ONI", "title": "Coalition intelligence", "body": "ONI represents plurality, adaptation, and the strategic advantage of shared expertise across species." },
+        { "eyebrow": "Ustur", "title": "Precision and optimization", "body": "Ustur creates the cold, elegant counterpoint that every premium sci-fi setting needs." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Why this matters",
+      "heading": "Lore is strongest when it sharpens player choice.",
+      "body": [
+        "The redesign trims exposition and keeps the emphasis on decision-making. Faction identity matters because it changes how the universe feels, not because the site dumps every detail up front.",
+        "That makes the page easier to absorb while still preserving the sense of a larger world beyond the marketing shell."
+      ],
+      "asideEyebrow": "Use case",
+      "asideTitle": "The universe page should create attraction, not homework.",
+      "asideBody": "It exists to deepen desire and confidence, not to force encyclopedic reading before action.",
+      "asidePoints": ["Choose a side", "Understand the tone", "Follow the politics", "Enter with context"]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "Short answers that keep the page moving.",
+      "items": [
+        { "question": "Why avoid deep lore walls here?", "answer": "Because this page is a gateway. The job is to create clarity and desire, then let the universe expand through later pages and community channels." },
+        { "question": "What should someone do after this page?", "answer": "Either move into Galia for the frontier context or into the newsroom and roadmap for a clearer picture of how the world is evolving." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Carry the universe into play and progress.",
+    "text": "See the frontier, follow the roadmap, or move into gameplay systems that turn faction identity into stakes.",
+    "primaryAction": { "label": "See the roadmap", "href": "/roadmap/" },
+    "secondaryAction": { "label": "View Game Overview", "href": "/game/", "variant": "secondary" }
+  }
+}

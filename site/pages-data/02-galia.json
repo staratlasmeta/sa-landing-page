@@ -1,0 +1,76 @@
+{
+  "path": "game/galia/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "Galia Expanse",
+  "description": "Explore the contested frontier of Star Atlas, where territory, extraction, and faction pressure turn scale into meaningful stakes.",
+  "eyebrow": "Feature page",
+  "heroTitle": "The frontier is only compelling when it feels contested.",
+  "heroSummary": "Galia is where scale becomes pressure. It is not empty spectacle. It is a frontier shaped by faction rivalry, extraction, navigation, and the risk of being exposed in valuable territory.",
+  "utilityLine": "This page has one purpose: explain why the Galia Expanse matters as the universe backbone.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 1 Galia.mp4",
+    "poster": "src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_1_ImageThumbnail.png",
+    "label": "Galia preview",
+    "caption": "The universe page should communicate tension, scale, and opportunity in one frame.",
+    "alt": "Star Atlas Galia Expanse preview"
+  },
+  "heroStats": [
+    { "value": "3", "label": "Major factions" },
+    { "value": "Frontier", "label": "Territory pressure" },
+    { "value": "Persistent", "label": "Economic stakes" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Narrative role",
+    "title": "Galia is the reason the rest of the system matters.",
+    "body": "Without a meaningful frontier, ships, trade, and faction identity all feel abstract. This page now anchors those systems in a place worth competing over.",
+    "bullets": ["Exploration tied to payoff", "Conflict tied to geography", "Economy tied to location and risk"]
+  },
+  "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+  "secondaryAction": { "label": "View the universe", "href": "/game/life-in-galia/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "story",
+      "eyebrow": "Why it matters",
+      "heading": "A premium sci-fi universe needs more than pretty emptiness.",
+      "body": [
+        "Galia earns attention because it combines beauty with consequence. Valuable routes, extractable resources, and faction-aligned space all create reasons to move, defend, scout, and claim.",
+        "The redesign strips away excess copy and explains the world through a smaller number of legible ideas: what the space is, why it matters, and how a player fits into it."
+      ],
+      "bullets": ["Travel is tied to opportunity and danger", "Territory control changes strategic value", "Lore supports the conflict instead of overwhelming it"],
+      "asideEyebrow": "System impact",
+      "asideTitle": "The frontier clarifies the rest of the site architecture.",
+      "asideBody": "Game, economy, and faction pages now all point back to this shared spatial context.",
+      "asidePoints": ["Exploration", "Extraction", "Conflict", "Reputation"]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Core loops",
+      "heading": "What a player actually does in contested space.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "Movement", "title": "Scout and traverse", "body": "Move through valuable zones with a constant tradeoff between visibility, speed, and safety." },
+        { "eyebrow": "Industry", "title": "Extract under pressure", "body": "Resource gathering feels meaningful when the terrain and the politics around it create tension." },
+        { "eyebrow": "Conflict", "title": "Defend, challenge, expand", "body": "The frontier is where faction presence, opportunism, and escalation meet." }
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Clarity",
+      "heading": "The minimum context a new visitor needs.",
+      "items": [
+        { "question": "Is Galia lore or gameplay?", "answer": "It is both, but the page now leads with function. Lore supports player motivation instead of hiding it." },
+        { "question": "Why is this page shorter than before?", "answer": "Because first-touch pages should reduce cognitive load. The goal is immediate understanding, then optional deeper reading." },
+        { "question": "Where should someone go after this page?", "answer": "Either into the browser experience for immediate engagement or into the fleet and economy pages for a more strategic view." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Move from the frontier into the systems built around it.",
+    "text": "Follow the universe into faction identity, fleet command, or the browser-first economy entry points.",
+    "primaryAction": { "label": "View Fleet Command", "href": "/game/fleet-command/" },
+    "secondaryAction": { "label": "See Life in Galia", "href": "/game/life-in-galia/", "variant": "secondary" }
+  }
+}

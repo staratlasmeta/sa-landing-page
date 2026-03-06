@@ -1,0 +1,62 @@
+{
+  "path": "contact/",
+  "template": "contact",
+  "navKey": "support",
+  "title": "Contact and Support",
+  "description": "A clearer support page for Star Atlas with distinct paths for player help, community guidance, press inquiries, and marketplace-related questions.",
+  "eyebrow": "Support",
+  "heroTitle": "Support should feel immediate, calm, and easy to route.",
+  "heroSummary": "This page replaces dead-end contact patterns with distinct support paths so visitors can tell where to go without guessing.",
+  "utilityLine": "Forms should only appear here if they are fully working and context-aware. Otherwise direct visitors into the right maintained destination.",
+  "heroMedia": {
+    "type": "image",
+    "src": "src/community/discord-bg.jpg",
+    "label": "Support hub",
+    "caption": "A premium support experience starts with obvious routing and less friction.",
+    "alt": "Star Atlas support atmosphere"
+  },
+  "heroStats": [
+    { "value": "Help Center", "label": "Product and account help" },
+    { "value": "Discord", "label": "Community guidance" },
+    { "value": "Contact", "label": "Direct outreach path" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Support principle",
+    "title": "Tell people exactly where they are going.",
+    "body": "External destinations are now clearly framed, and each support option is tied to a distinct type of need so visitors do not bounce between dead ends.",
+    "bullets": ["Player help route", "Community route", "Business and media route"]
+  },
+  "primaryAction": { "label": "Open Help Center", "href": "https://support.staratlas.com/", "external": true },
+  "secondaryAction": { "label": "Join Discord", "href": "https://discord.gg/staratlas", "variant": "secondary", "external": true },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Support paths",
+      "heading": "Route visitors by intent.",
+      "columns": 4,
+      "cards": [
+        { "eyebrow": "Players", "title": "Help Center", "body": "Use the support knowledge base and player-help workflows for account, gameplay, and onboarding issues.", "action": { "label": "Open Help Center", "href": "https://support.staratlas.com/", "external": true } },
+        { "eyebrow": "Community", "title": "Discord", "body": "Best for live community conversation, quick peer help, and shared discovery.", "action": { "label": "Join Discord", "href": "https://discord.gg/staratlas", "external": true } },
+        { "eyebrow": "Direct contact", "title": "Contact page", "body": "Use the direct outreach path when the issue requires staff visibility beyond self-serve support.", "action": { "label": "Open support center", "href": "https://support.staratlas.com/", "external": true } },
+        { "eyebrow": "Marketplace", "title": "Market and asset exploration", "body": "For economy and asset questions, it is often helpful to route visitors straight into the marketplace surface with context.", "action": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "external": true } }
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "Keep support expectations explicit.",
+      "items": [
+        { "question": "Why not put a general form in the hero?", "answer": "Because undifferentiated contact forms create more uncertainty. Routing by need is faster for the visitor and easier to maintain." },
+        { "question": "How should external support destinations be handled?", "answer": "Always label them clearly so visitors know when they are leaving the main marketing shell." },
+        { "question": "What if support volume grows?", "answer": "This template is designed to absorb more specialized paths over time while keeping the first decision simple." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Need something else?",
+    "title": "Move back into product, roadmap, or community with confidence.",
+    "text": "Support is part of the premium experience. The next step should always feel obvious.",
+    "primaryAction": { "label": "View homepage", "href": "/" },
+    "secondaryAction": { "label": "View roadmap", "href": "/roadmap/", "variant": "secondary" }
+  }
+}

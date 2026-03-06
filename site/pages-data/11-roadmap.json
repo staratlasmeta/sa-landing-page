@@ -1,0 +1,86 @@
+{
+  "path": "roadmap/",
+  "template": "roadmap",
+  "navKey": "updates",
+  "title": "Roadmap",
+  "description": "A roadmap page for Star Atlas that clarifies what is playable now, what is expanding next, and how long-term ambition is communicated without hype or confusion.",
+  "eyebrow": "Roadmap",
+  "heroTitle": "Status should be understandable in one glance.",
+  "heroSummary": "This roadmap template replaces vague launch-state language with a calmer frame: what exists now, what is expanding next, and what remains part of the long arc of the universe.",
+  "utilityLine": "Avoid quarter-heavy timelines here unless they can be maintained rigorously. The structure is designed to stay useful even when exact dates evolve.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Tds Slide 1 Fleetcommand.mp4",
+    "poster": "src/GAME section/Top-down RTS View/Thumbnail Images/RTS_Slide_1_ImageThumbnail.png",
+    "label": "Trajectory",
+    "caption": "A roadmap should reduce uncertainty, not create more of it.",
+    "alt": "Star Atlas roadmap trajectory preview"
+  },
+  "heroStats": [
+    { "value": "Now", "label": "Playable entry points" },
+    { "value": "Next", "label": "Expanding surfaces" },
+    { "value": "Later", "label": "Long-range ambition" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Trust framework",
+    "title": "The roadmap now favors clarity over theater.",
+    "body": "No countdowns, no brittle urgency signals, and no contradictory state labels. The page is designed to help visitors understand momentum without overpromising.",
+    "bullets": ["Plain-language product status", "A durable now-next-later structure", "Better alignment with homepage messaging"]
+  },
+  "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+  "secondaryAction": { "label": "Open newsroom", "href": "/newsroom/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "timeline",
+      "eyebrow": "Current trajectory",
+      "heading": "Frame the product around momentum, not hype.",
+      "items": [
+        {
+          "phase": "Now",
+          "title": "Playable browser and market surfaces",
+          "body": "Lead with the parts of the product that are already accessible and meaningful for first-touch visitors.",
+          "bullets": ["Browser-first entry", "Marketplace access", "Economy and ownership context"]
+        },
+        {
+          "phase": "Next",
+          "title": "Broader gameplay and command expansion",
+          "body": "Use this band for the layers that are actively deepening and deserve clear expectation-setting.",
+          "bullets": ["Higher-fidelity gameplay surfaces", "Strategic command expression", "Improved continuity across systems"]
+        },
+        {
+          "phase": "Later",
+          "title": "The full long-range universe vision",
+          "body": "Reserve this space for ambition, but keep it obviously separate from immediate product reality.",
+          "bullets": ["Persistent world expansion", "Long-horizon feature depth", "Greater player and faction consequence"]
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Roadmap rules",
+      "heading": "What this page should never do again.",
+      "columns": 3,
+      "cards": [
+        { "eyebrow": "No clutter", "title": "Do not compete with the hero", "body": "The roadmap should clarify state, not bury it under repeated CTAs or utility chrome." },
+        { "eyebrow": "No confusion", "title": "Use one consistent product-state vocabulary", "body": "If the product is playable in some surfaces and expanding in others, say that plainly and consistently everywhere." },
+        { "eyebrow": "No stale theater", "title": "Remove brittle urgency signals", "body": "Countdowns, old campaign artifacts, and unclear launch labels make the product feel less premium." }
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "How to keep roadmap messaging trustworthy.",
+      "items": [
+        { "question": "Why use now, next, and later instead of dated quarters everywhere?", "answer": "Because this structure stays useful when schedules shift and avoids the trust erosion that comes from stale date promises." },
+        { "question": "What should be mirrored on the homepage?", "answer": "Only the high-level status summary. The detailed explanation lives here so the homepage stays calm and focused." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Continue",
+    "title": "Move from status clarity into action.",
+    "text": "Launch the browser experience, visit the newsroom, or continue into the game and economy pages with a clearer understanding of product state.",
+    "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+    "secondaryAction": { "label": "Open newsroom", "href": "/newsroom/", "variant": "secondary" }
+  }
+}

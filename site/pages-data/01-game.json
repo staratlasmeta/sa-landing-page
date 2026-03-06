@@ -1,0 +1,131 @@
+{
+  "path": "game/",
+  "template": "game-hub",
+  "navKey": "game",
+  "title": "Game Overview",
+  "description": "Star Atlas brings together cinematic exploration, strategic fleet command, and browser-native progression in one premium sci-fi universe.",
+  "eyebrow": "Game overview",
+  "heroTitle": "One universe. Multiple ways to enter it.",
+  "heroSummary": "Star Atlas is strongest when it is framed as a layered product. Start with the browser experience, move into strategy and ownership loops, and then expand into the most cinematic gameplay surfaces.",
+  "utilityLine": "Playable browser systems and marketplace access are live today. Higher-fidelity gameplay surfaces continue to expand.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/herosection_loop_7-21-hb3.mp4",
+    "poster": "src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_1_ImageThumbnail.png",
+    "label": "Universe preview",
+    "caption": "A calmer first impression: one visual anchor, one product story, one next step.",
+    "alt": "Star Atlas universe preview"
+  },
+  "heroStats": [
+    { "value": "3", "label": "Core entry paths" },
+    { "value": "Browser", "label": "First-touch launch" },
+    { "value": "Live", "label": "Economy access" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Why this shell works",
+    "title": "The homepage now points visitors toward action, not confusion.",
+    "body": "The new model puts the browser experience first, labels external destinations clearly, and keeps the deeper systems available without overwhelming the first impression.",
+    "bullets": [
+      "One hero story instead of multiple competing asks",
+      "Gameplay, economy, and status language separated by intent",
+      "Supporting pages designed as premium follow-through, not clutter"
+    ]
+  },
+  "primaryAction": {
+    "label": "Launch browser experience",
+    "href": "https://play.staratlas.com/",
+    "external": true
+  },
+  "secondaryAction": {
+    "label": "Explore the showcase",
+    "href": "/#showcase",
+    "variant": "secondary"
+  },
+  "sections": [
+    {
+      "type": "metrics",
+      "eyebrow": "At a glance",
+      "heading": "A simpler product frame for new visitors.",
+      "text": "The marketing site now supports a single conversion path first, then reveals the rest of the universe with better hierarchy.",
+      "columns": 4,
+      "items": [
+        { "value": "Browser first", "label": "Immediate start", "detail": "New visitors can enter the ecosystem without a download wall." },
+        { "value": "Cinematic", "label": "High-fidelity ambition", "detail": "The world still leads with scale, spectacle, and sci-fi immersion." },
+        { "value": "Strategic", "label": "Command depth", "detail": "Fleet-level play sits beside cockpit and on-foot experiences." },
+        { "value": "Player-driven", "label": "Economy layer", "detail": "Markets, rentals, production loops, and ownership shape long-term stakes." }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Choose your route",
+      "heading": "Three entry points, each with a clear role.",
+      "text": "Instead of making every visitor decipher everything at once, the site now explains the universe through distinct modes of engagement.",
+      "columns": 3,
+      "cards": [
+        {
+          "eyebrow": "Immersive play",
+          "title": "Explore the Galia Expanse",
+          "body": "See the frontier up close through cinematic traversal, combat pressure, and faction conflict.",
+          "bullets": [
+            "Third-person perspective and world scale",
+            "Resource pressure and contested territory",
+            "The strongest expression of the universe fantasy"
+          ],
+          "action": { "label": "See Galia", "href": "/game/galia/" }
+        },
+        {
+          "eyebrow": "Command layer",
+          "title": "Move up to fleet command",
+          "body": "Zoom out from the pilot seat and think like an admiral, operator, or faction strategist.",
+          "bullets": [
+            "Territory, logistics, and positioning",
+            "Higher-order decisions with persistent stakes",
+            "Designed for scale, coordination, and rivalry"
+          ],
+          "action": { "label": "View Fleet Command", "href": "/game/fleet-command/" }
+        },
+        {
+          "eyebrow": "Browser access",
+          "title": "Start with Holosim and SAGE Labs",
+          "body": "Launch directly into browser-native systems that introduce economy, ships, and strategic ownership with less friction.",
+          "bullets": [
+            "Fastest path into the product",
+            "Good for first-time experimentation",
+            "Bridges into deeper market and progression loops"
+          ],
+          "action": { "label": "Open browser paths", "href": "/game/holosim/" }
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Go deeper",
+      "heading": "Follow the parts of the universe that matter to you.",
+      "text": "The supporting pages are now organized by player intent instead of a flat list of destinations.",
+      "columns": 4,
+      "cards": [
+        { "eyebrow": "Modes", "title": "Game modes", "body": "Combat, traversal, PvE, and competitive loops framed as a single gameplay family.", "action": { "label": "View modes", "href": "/game/game-modes/" } },
+        { "eyebrow": "Ownership", "title": "Your fleet, your way", "body": "Ships are more than cosmetics. They are homes, tools, status, and economic leverage.", "action": { "label": "View fleet systems", "href": "/game/your-fleet-your-way/" } },
+        { "eyebrow": "Lore", "title": "Life in Galia", "body": "Understand the factions, species, and political texture that give the universe character.", "action": { "label": "View the universe", "href": "/game/life-in-galia/" } },
+        { "eyebrow": "Economy", "title": "SAGE Labs", "body": "Step into production, movement, and industrial loops that make ownership meaningful.", "action": { "label": "View SAGE Labs", "href": "/game/sage-labs/" } }
+      ]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Common questions",
+      "heading": "What new visitors need to understand fast.",
+      "items": [
+        { "question": "What is the first thing someone should do on this site?", "answer": "Launch the browser experience. It creates immediate engagement without forcing a first-time visitor to decode every system first." },
+        { "question": "Is Star Atlas one game or several separate products?", "answer": "It is one universe with multiple surfaces. The site now presents those surfaces as connected entry points rather than disconnected destinations." },
+        { "question": "Why keep the marketing shell restrained?", "answer": "Because premium means confidence. The redesign uses fewer, stronger moments so the ambition reads as deliberate instead of noisy." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Enter Star Atlas with the clearest path first.",
+    "text": "Launch the browser experience now or continue into the cinematic and strategic layers with more context.",
+    "primaryAction": { "label": "Launch browser experience", "href": "https://play.staratlas.com/", "external": true },
+    "secondaryAction": { "label": "Explore the homepage", "href": "/#paths", "variant": "secondary" }
+  }
+}

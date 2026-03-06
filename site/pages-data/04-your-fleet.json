@@ -1,0 +1,75 @@
+{
+  "path": "game/your-fleet-your-way/",
+  "template": "feature",
+  "navKey": "game",
+  "title": "Your Fleet, Your Way",
+  "description": "See how ships, ownership, customization, rentals, and fleet identity become one of the strongest premium hooks in Star Atlas.",
+  "eyebrow": "Feature page",
+  "heroTitle": "In Star Atlas, your fleet is identity, leverage, and access.",
+  "heroSummary": "Ships are not just a catalog. They are how players express taste, capability, status, and economic intent. This page now presents fleet ownership as a premium system instead of a scattered list of features.",
+  "utilityLine": "The job of this page is to make fleet ownership feel aspirational and understandable in the same glance.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 3 Yourfleetyourway.mp4",
+    "poster": "src/GAME section/3rd Person Experience/Thumbnails in carousel/Slide_3_ImageThumbnail.png",
+    "label": "Fleet preview",
+    "caption": "A cleaner product story around ownership, role, and progression.",
+    "alt": "Star Atlas fleet preview"
+  },
+  "heroStats": [
+    { "value": "Ownership", "label": "Identity layer" },
+    { "value": "Rentals", "label": "Flexible access" },
+    { "value": "Modular", "label": "Strategic fit" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Why it compels",
+    "title": "People engage when the product makes ambition tangible.",
+    "body": "Fleet ownership is one of the strongest emotional and strategic hooks in Star Atlas. The redesign gives it the editorial weight it deserves.",
+    "bullets": ["Aspirational without becoming vague", "Practical without feeling dry", "Connected to economy, travel, and status"]
+  },
+  "primaryAction": { "label": "View the marketplace", "href": "https://play.staratlas.com/market/", "external": true },
+  "secondaryAction": { "label": "Open SAGE Labs", "href": "/game/sage-labs/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Fleet pillars",
+      "heading": "Why ships matter beyond aesthetics.",
+      "columns": 4,
+      "cards": [
+        { "eyebrow": "Role", "title": "Ships define capability", "body": "What you can reach, haul, defend, or command is shaped by the fleet you assemble." },
+        { "eyebrow": "Status", "title": "Ships communicate identity", "body": "The fleet becomes a visible statement about taste, commitment, and intent." },
+        { "eyebrow": "Access", "title": "Rentals widen participation", "body": "Players can test roles, scale faster, or monetize idle assets without hard binary ownership barriers." },
+        { "eyebrow": "Strategy", "title": "Composition changes outcomes", "body": "Fleet building is a decision surface, not just a collection hobby." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Page strategy",
+      "heading": "This template turns a complex ownership story into a premium sales moment.",
+      "body": [
+        "Instead of burying the appeal of ships under scattered utility text, the redesign makes the emotional pitch and the practical value legible at the same time.",
+        "That balance matters because the best conversion moments on a product like this are aspirational, not merely informational."
+      ],
+      "asideEyebrow": "Designed outcome",
+      "asideTitle": "The visitor should picture themselves inside the system.",
+      "asideBody": "A premium page helps people imagine their role in the product rather than just read about it.",
+      "asidePoints": ["Collector", "Operator", "Trader", "Faction captain"]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "What the page answers clearly now.",
+      "items": [
+        { "question": "Is ownership required to engage with Star Atlas?", "answer": "No. The redesign makes rentals and browser entry points more visible so the path into the ecosystem feels less gated." },
+        { "question": "Why emphasize identity so much here?", "answer": "Because premium products convert when they connect utility to aspiration. The fleet system does both." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Turn fleet interest into real engagement.",
+    "text": "Browse the marketplace, explore browser systems, or continue into the strategic command layer.",
+    "primaryAction": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "external": true },
+    "secondaryAction": { "label": "See Fleet Command", "href": "/game/fleet-command/", "variant": "secondary" }
+  }
+}

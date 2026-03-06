@@ -1,0 +1,76 @@
+{
+  "path": "economy/",
+  "template": "economy",
+  "navKey": "economy",
+  "title": "Economy",
+  "description": "Understand the Star Atlas economy through a cleaner, higher-trust frame that explains ownership, marketplaces, rentals, and industrial systems without overload.",
+  "eyebrow": "Economy",
+  "heroTitle": "The economy should feel legible before it feels deep.",
+  "heroSummary": "This page gives the economy one clear narrative: assets, production, and trade create persistent stakes across the Star Atlas universe. The design prioritizes trust over jargon and removes stale, brittle proof points.",
+  "utilityLine": "Precise numbers were intentionally de-emphasized here unless they can be kept current. The page leads with stable value propositions instead.",
+  "heroMedia": {
+    "type": "video",
+    "src": "src/Reduced/Slide 2 Holosim.mp4",
+    "poster": "src/GAME section/Top-down RTS View/Thumbnail Images/Slide_1_Holosim_Thumbnail.png",
+    "label": "Economy layer",
+    "caption": "A cleaner framing of ownership, production, and trade.",
+    "alt": "Star Atlas economy preview"
+  },
+  "heroStats": [
+    { "value": "Marketplace", "label": "Asset discovery" },
+    { "value": "Rentals", "label": "Flexible access" },
+    { "value": "Industry", "label": "Operational depth" }
+  ],
+  "heroPanel": {
+    "eyebrow": "Trust signal",
+    "title": "This page avoids stale metrics in favor of durable clarity.",
+    "body": "Product confidence drops when old dashboards and outdated numbers dominate the story. The redesign explains the economy through structure, not fragile statistics.",
+    "bullets": ["Stable concepts over easily outdated claims", "Marketplace and industrial loops clearly separated", "Ownership framed as utility plus aspiration"]
+  },
+  "primaryAction": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "external": true },
+  "secondaryAction": { "label": "Explore SAGE Labs", "href": "/game/sage-labs/", "variant": "secondary" },
+  "sections": [
+    {
+      "type": "cards",
+      "eyebrow": "Economy stack",
+      "heading": "Four layers that make the economy understandable.",
+      "columns": 4,
+      "cards": [
+        { "eyebrow": "Discovery", "title": "Marketplace access", "body": "The entry point for browsing assets, evaluating opportunity, and understanding the breadth of the ecosystem." },
+        { "eyebrow": "Participation", "title": "Rentals and flexible access", "body": "A stronger economy is one that allows people to test roles and capabilities without all-or-nothing commitment." },
+        { "eyebrow": "Production", "title": "Industrial loops", "body": "Crafting, extraction, and logistics make ownership useful beyond speculation." },
+        { "eyebrow": "Consequence", "title": "Persistent strategic value", "body": "Assets matter more when they connect to territory, fleet readiness, and operational choice." }
+      ]
+    },
+    {
+      "type": "story",
+      "eyebrow": "Positioning",
+      "heading": "The economy page should reassure first, then intrigue.",
+      "body": [
+        "A first-touch economy page does not need to prove everything at once. It needs to show visitors that there is a coherent system behind the marketplace and that participation has meaningful texture.",
+        "That is why the redesign emphasizes structure, access, and player intent instead of drowning the page in dashboard fragments or repeated CTAs."
+      ],
+      "asideEyebrow": "Page discipline",
+      "asideTitle": "One page, one job.",
+      "asideBody": "Here the job is simple: make the economy feel coherent, premium, and worth engaging with.",
+      "asidePoints": ["Ownership", "Production", "Trade", "Leverage"]
+    },
+    {
+      "type": "faq",
+      "eyebrow": "Questions",
+      "heading": "What needs to be explicit.",
+      "items": [
+        { "question": "Why remove detailed live stats from the hero?", "answer": "Because stale proof erodes trust. Unless metrics can stay current and contextual, the page is stronger without them." },
+        { "question": "What is the recommended next step from here?", "answer": "Open the marketplace for immediate exploration, then move into SAGE Labs or the game overview depending on your level of intent." },
+        { "question": "How does this stay premium instead of reading like financial software?", "answer": "The visual system keeps the economy in the same cinematic world as the rest of the site, while the copy stays direct and high-trust." }
+      ]
+    }
+  ],
+  "finalCta": {
+    "eyebrow": "Next step",
+    "title": "Explore the economy with less ambiguity.",
+    "text": "Open the marketplace now or continue into the browser and industrial systems that give the economy operational weight.",
+    "primaryAction": { "label": "Open marketplace", "href": "https://play.staratlas.com/market/", "external": true },
+    "secondaryAction": { "label": "Explore SAGE Labs", "href": "/game/sage-labs/", "variant": "secondary" }
+  }
+}
