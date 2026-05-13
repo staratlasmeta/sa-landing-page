@@ -87,7 +87,7 @@ sa-landing-page/
 ### Prerequisites
 
 - **Node.js** (v18+ recommended) for running the generator.
-- A local static file server for preview (e.g. Python, `npx serve`).
+- A local static file server for preview (e.g. Python, or `npx serve` if you have npm installed).
 
 ### Local preview
 
@@ -97,8 +97,8 @@ Serve the repo root so that `/` and `/game/...` resolve correctly:
 # Python
 python3 -m http.server 8080
 
-# Or Node
-npx serve .
+# Or Node/npm
+npx serve . -l 8080
 ```
 
 Then open `http://localhost:8080` (or the port shown). The 404 page is only used when deployed to GitHub Pages.
