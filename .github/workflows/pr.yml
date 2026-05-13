@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: warp-ubuntu-latest-x64-4x
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/build-install
         with:
           galaxy-url: ${{ secrets.GALAXY_URL }}
