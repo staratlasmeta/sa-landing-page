@@ -13,7 +13,7 @@ jobs:
     runs-on: warp-ubuntu-latest-x64-4x
     environment: dev
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build static site for dev
         uses: ./.github/actions/build-install
         with:
@@ -30,7 +30,7 @@ jobs:
     environment: prod
     needs: [dev-build-deploy]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build static site for prod
         uses: ./.github/actions/build-install
         with:
