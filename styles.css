@@ -392,6 +392,7 @@ nav.scrolled {
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
 }
 
 .logo {
@@ -419,6 +420,60 @@ nav.scrolled {
     gap: 3rem;
     align-items: center;
     list-style: none;
+}
+
+.mobile-nav-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 2rem;
+    margin-left: 3rem;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.mobile-menu-toggle:focus-visible {
+    outline: 2px solid #32feff;
+    outline-offset: 3px;
+}
+
+body.mobile-nav-open .mobile-menu-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+body.mobile-nav-open .mobile-menu-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+body.mobile-nav-open .mobile-menu-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+body.mobile-nav-open nav {
+    overflow: visible !important;
 }
 
 .nav-links a {
@@ -2800,8 +2855,104 @@ body.footer-bar-visible footer {
         display: none;
     }
 
-    .nav-links {
+    body.mobile-nav-open {
+        overflow: hidden;
+    }
+
+    .nav-main {
+        padding: 0.85rem 5%;
+    }
+
+    .logo {
+        height: 32px;
+        flex: 0 1 auto;
+        max-width: calc(100vw - 116px);
+    }
+
+    .logo img {
+        max-width: 100%;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        flex: 0 0 44px;
+    }
+
+    .mobile-nav-panel {
         display: none;
+        position: absolute;
+        top: calc(100% + 0.85rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        margin: 0;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+
+    body.mobile-nav-open .mobile-nav-panel {
+        display: flex;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+        width: 100%;
+        padding: 0 0.25rem;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        min-width: 0;
+        margin: 0.25rem 0 0.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .dropdown-menu a {
+        min-height: 42px;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+    }
+
+    .dropdown-menu a:hover {
+        padding-left: 1rem;
+    }
+
+    .nav-cta {
+        width: 100%;
+    }
+
+    .nav-cta .download-btn {
+        width: 100%;
+        justify-content: center;
     }
 
     .platform-icons {
@@ -3244,6 +3395,30 @@ body.footer-bar-visible footer {
 /* Remove inherited underline from dropdown links */
 .dropdown-menu a::after {
     display: none !important;
+}
+
+@media (max-width: 768px) {
+    body.mobile-nav-open .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        min-width: 0;
+        margin: 0.25rem 0 0.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    body.mobile-nav-open .dropdown-menu a {
+        min-height: 42px;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+    }
+
+    body.mobile-nav-open .dropdown-menu a:hover {
+        padding-left: 1rem;
+    }
 }
 
 /* Convert button to link style - removed duplicate styles */ 
