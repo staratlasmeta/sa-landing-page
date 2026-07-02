@@ -226,13 +226,20 @@ function pageHtml({ site, page, allPages }) {
             <img src="${logoHref}" alt="Star Atlas">
           </a>
         </div>
-        <ul class="nav-links">
-          <li><a href="${prefix}game/">Game</a></li>
-          <li><a href="${relHome}#economy">Economy</a></li>
-          <li><a href="${relHome}#community">Community</a></li>
-        </ul>
-        <div class="nav-cta">
-          <a href="https://play.staratlas.com/market/" target="_blank" class="download-btn" rel="noopener noreferrer"><span>Galactic Marketplace</span></a>
+        <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="mobile-nav-panel" id="primary-navigation">
+          <ul class="nav-links">
+            <li><a href="${prefix}game/">Game</a></li>
+            <li><a href="${relHome}#economy">Economy</a></li>
+            <li><a href="${relHome}#community">Community</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="https://play.staratlas.com/market/" target="_blank" class="download-btn" rel="noopener noreferrer"><span>Galactic Marketplace</span></a>
+          </div>
         </div>
       </div>
     </div>
