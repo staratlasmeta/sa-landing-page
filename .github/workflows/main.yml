@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   dev-build-deploy:
-    runs-on: warp-ubuntu-latest-x64-4x
+    runs-on: ubuntu-24.04
     environment: dev
     steps:
       - uses: actions/checkout@v6
@@ -26,7 +26,7 @@ jobs:
           src-dir: dist
 
   prod-build-deploy:
-    runs-on: warp-ubuntu-latest-x64-4x
+    runs-on: ubuntu-24.04
     environment: prod
     needs: [dev-build-deploy]
     steps:
